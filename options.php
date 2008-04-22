@@ -1,4 +1,7 @@
 <?
+if (function_exists('load_plugin_textdomain')) {
+    load_plugin_textdomain('header-footer', 'wp-content/plugins/header-footer');
+}
 function hefo_request($name, $default=null) 
 {
 	if (!isset($_REQUEST[$name])) return $default;
@@ -56,11 +59,11 @@ else
 <h2>Header-Footer</h2>
 
 <table class="form-table">
-<tr valign="top"><?php hefo_field_textarea('head', 'Head html code', '(eg. the verification metatag of Google or MSN Webmaster Tools)', 'rows="10"'); ?></tr>
-<tr valign="top"><?php hefo_field_textarea('footer', 'Footer code', '(eg. the Google Analytics code or the MyBlogLog tracking code)', 'rows="10"'); ?></tr>
+<tr valign="top"><?php hefo_field_textarea('head', __('head', 'header-footer'), __('head hint', 'header-footer'), 'rows="10"'); ?></tr>
+<tr valign="top"><?php hefo_field_textarea('footer', __('footer', 'header-footer'), __('footer hint', 'header-footer'), 'rows="10"'); ?></tr>
 </table>
 
-<p class="submit"><input type="submit" name="save" value="Save"></p>
+<p class="submit"><input type="submit" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
 
 </form>
 </div>

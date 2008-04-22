@@ -1,8 +1,8 @@
 === Header-Footer ===
-Tags: header, footer, blog, page, single, post
+Tags: header, footer, blog, page, single, post, head, tracking
 Requires at least: 2.1
-Tested up to: 2.3
-Stable tag: 1.0.1
+Tested up to: 2.5
+Stable tag: 1.0.2
 Donate link: http://www.satollo.com/english/donate
 Contributors: satollo
 
