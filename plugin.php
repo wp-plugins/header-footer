@@ -3,7 +3,7 @@
 Plugin Name: Header-Footer
 Plugin URI: http://www.satollo.com/english/wordpress/header-footer
 Description: Header-Footer plugin let you to add html code to the header and to the footer.
-Version: 1.0.2
+Version: 1.0.3
 Author: Satollo
 Author URI: http://www.satollo.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -38,7 +38,8 @@ add_action('wp_head', 'hefo_wp_head');
 function hefo_wp_head()
 {
     global $hefo_options;
-
+    
+    if (is_home()) echo $hefo_options['head_home'];
     echo $hefo_options['head'];
 }
 
