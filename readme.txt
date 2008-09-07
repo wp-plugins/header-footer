@@ -2,7 +2,7 @@
 Tags: header, footer, blog, page, single, post, head, tracking
 Requires at least: 2.1
 Tested up to: 2.5.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Donate link: http://www.satollo.com/english/donate
 Contributors: satollo
 
@@ -20,6 +20,9 @@ Please, help me to translate this plugin: get the plugin and start from the engl
 bundle. Send me the translated version to satollo@gmail.com.
 
 == Versions ==
+
+1.0.4
+    - fixed the usage of short php tag
 
 1.0.3
 	- added the "only home" header text

@@ -1,4 +1,4 @@
-<?
+<?php
 if (function_exists('load_plugin_textdomain')) {
     load_plugin_textdomain('header-footer', 'wp-content/plugins/header-footer');
 }
