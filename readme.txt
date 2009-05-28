@@ -1,28 +1,31 @@
 === Header-Footer ===
 Tags: header, footer, blog, page, single, post, head, tracking
 Requires at least: 2.1
-Tested up to: 2.5.1
-Stable tag: 1.0.5
+Tested up to: 2.7.1
+Stable tag: trunk
 Donate link: http://www.satollo.com/english/donate
 Contributors: satollo
 
-Header-Footer plugin let you to add html code to the header and to the footer.
+Header and Footer plugin let you to add html code to the header and to the footer.
 
 == Description ==
 
-Header-Footer plugin let you to add html code to the header and to the footer.
+Why you have to install 10 plugins to add Google Analytics code, MyBlogLog
+tracking code, Google Webmaster verificaton code, MyblogLog verification code,
+tradedoubler verification code (and so on...) on head of footer section of your blog
+pages?
 
-It can be used to add footer code like Google Analytics, My Blog Log, and other. In
-the header, can be used to add metatag like the ones used by Google and MSN to
-verify the site.
+With Header and Footer plugin you can just copy the code those services give you
+in a textarea. No other to do.
 
-Please, help me to translate this plugin: get the plugin and start from the english
-bundle. Send me the translated version to satollo@gmail.com.
 
 == Versions ==
 
+1.0.6
+    - WP 2.7.1 compatibility check
+
 1.0.5
-    - added the german translation by Ev. Jugend Schwandorf - Sebastian Möller (http://www.ej-schwandorf.de)
+    - added the german translation by Ev. Jugend Schwandorf - Sebastian Mï¿½ller (http://www.ej-schwandorf.de)
 
 1.0.4
     - fixed the usage of short php tag

@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Header-Footer
+Plugin Name: Header and Footer
 Plugin URI: http://www.satollo.com/english/wordpress/header-footer
-Description: Header-Footer plugin let you to add html code to the header and to the footer.
-Version: 1.0.5
+Description: Header and Footer plugin let you to add html/javascript code to the head and footer of blog pages
+Version: 1.0.6
 Author: Satollo
 Author URI: http://www.satollo.com
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -31,7 +31,7 @@ $hefo_options = get_option('hefo');
 add_action('admin_head', 'hefo_admin_head');
 function hefo_admin_head()
 {
-    add_options_page('Header-Footer', 'Header-Footer', 'manage_options', 'header-footer/options.php');
+    add_options_page('Header and Footer', 'Header and Footer', 'manage_options', 'header-footer/options.php');
 }
 
 add_action('wp_head', 'hefo_wp_head');
