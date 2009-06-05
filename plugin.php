@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: Header and Footer
-Plugin URI: http://www.satollo.com/english/wordpress/header-footer
-Description: Header and Footer plugin let you to add html/javascript code to the head and footer of blog pages
-Version: 1.0.6
+Plugin URI: http://www.satollo.net/plugins/header-footer
+Description: Header and Footer plugin let you to add html/javascript code to the head and footer of blog pages. Goto to the admin panel to have more information or give a look to the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
+Version: 1.0.7
 Author: Satollo
-Author URI: http://www.satollo.com
+Author URI: http://www.satollo.net
 Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 */
 
-/*	Copyright 2008  Satollo  (email : satollo@gmail.com)
+/*	Copyright 2008  Satollo  (email : info@satollo.net)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,8 +28,8 @@ Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
 
 $hefo_options = get_option('hefo');
 
-add_action('admin_head', 'hefo_admin_head');
-function hefo_admin_head()
+add_action('admin_menu', 'hefo_admin_menu');
+function hefo_admin_menu()
 {
     add_options_page('Header and Footer', 'Header and Footer', 'manage_options', 'header-footer/options.php');
 }
@@ -40,6 +40,7 @@ function hefo_wp_head()
     global $hefo_options;
     
     if (is_home()) echo $hefo_options['head_home'];
+    
     echo $hefo_options['head'];
 }
 

@@ -56,7 +56,24 @@ else
 
 <form method="post">
 
-<h2>Header-Footer</h2>
+<h2>Header and Footer</h2>
+
+        <p>To have more information about Header and Footer go to the
+        <a href="http://www.satollo.net/plugins/header-footer">official plugin page</a>
+        or write me to info@satollo.net.</p>
+
+        <p>Donations are welcome,
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2545483">click here.</a>
+        </p>
+
+        <p>
+            My other plugins:
+            <a href="http://www.satollo.net/plugins/post-layout">Post Layout</a>,
+            <a href="http://www.satollo.net/plugins/post-layout-pro">Post Layout Pro</a>,
+            <a href="http://www.satollo.net/plugins/other-posts">Other Posts</a>,
+            <a href="http://www.satollo.net/plugins/protector">Protector</a>
+            <a href="http://www.satollo.net/plugins/newsletter">Newsletter</a>.
+        </p>
 
 <table class="form-table">
 <tr valign="top"><?php hefo_field_textarea('head_home', __('head_home', 'header-footer'), __('head hint', 'header-footer'), 'rows="4"'); ?></tr>
