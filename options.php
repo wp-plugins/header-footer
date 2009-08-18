@@ -5,14 +5,7 @@ if (function_exists('load_plugin_textdomain')) {
 function hefo_request($name, $default=null) 
 {
 	if (!isset($_REQUEST[$name])) return $default;
-	if (get_magic_quotes_gpc()) return hefo_stripslashes($_REQUEST[$name]);
-	else return $_REQUEST[$name];
-}
-
-function hefo_stripslashes($value)
-{
-	$value = is_array($value) ? array_map('hefo_stripslashes', $value) : stripslashes($value);
-	return $value;
+	return stripslashes_deep($_REQUEST[$name]);
 }
 	
 function hefo_field_checkbox($name, $label='', $tips='', $attrs='')
@@ -43,6 +36,7 @@ function hefo_field_textarea($name, $label='', $tips='', $attrs='')
 
 if (isset($_POST['save']))
 {
+    if (!wp_verify_nonce($_POST['_wpnonce'], 'save')) die('Securety violated');
     $options = hefo_request('options');
     update_option('hefo', $options);
 }
@@ -55,7 +49,7 @@ else
 <div class="wrap">
 
 <form method="post">
-
+<?php wp_nonce_field('save') ?>
 <h2>Header and Footer</h2>
 
         <p>To have more information about Header and Footer go to the
