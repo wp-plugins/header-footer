@@ -1,7 +1,7 @@
 === Header-Footer ===
 Tags: header, footer, blog, page, single, post, head, tracking
 Requires at least: 2.1
-Tested up to: 2.9
+Tested up to: 2.9.2
 Stable tag: trunk
 Donate link: http://www.satollo.com/english/donate
 Contributors: satollo
@@ -17,13 +17,6 @@ pages?
 
 With Header and Footer plugin you can just copy the code those services give you
 in a textarea. No other to do.
-
-**Check out my plugins**:
-
-* [Other Posts](http://www.satollo.net/plugins/other-posts)
-* [Newsletter](http://www.satollo.net/plugins/newsletter)
-* [Header and Footer](http://www.satollo.net/plugins/header-footer)
-
 
 == Versions ==
 
