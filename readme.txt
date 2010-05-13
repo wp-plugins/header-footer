@@ -3,7 +3,7 @@ Tags: header, footer, blog, page, single, post, head, tracking
 Requires at least: 2.1
 Tested up to: 2.9.2
 Stable tag: trunk
-Donate link: http://www.satollo.com/english/donate
+Donate link: http://www.satollo.net/donations
 Contributors: satollo
 
 Header and Footer plugin let you to add html code to the header and to the footer.
