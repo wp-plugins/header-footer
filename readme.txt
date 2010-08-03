@@ -1,7 +1,7 @@
 === Header-Footer ===
 Tags: header, footer, blog, page, single, post, head, tracking
 Requires at least: 2.1
-Tested up to: 2.9.2
+Tested up to: 3.0.1
 Stable tag: trunk
 Donate link: http://www.satollo.net/donations
 Contributors: satollo
