@@ -26,7 +26,7 @@ function hefo_field_textarea($name, $label='', $tips='', $attrs='') {
 
     echo '<th scope="row">';
     echo '<label for="options[' . $name . ']">' . $label . '</label></th>';
-    echo '<td><textarea style="width: 100%; height: 50px" onfocus="this.style.height=\'300px\'" onblur="this.style.height=\'50px\'" wrap="off" name="options[' . $name . ']">' .
+    echo '<td><textarea style="width: 100%; height: 100px" wrap="off" name="options[' . $name . ']">' .
         htmlspecialchars($options[$name]) . '</textarea>';
     echo '<br /> ' . $tips;
     echo '</td>';
@@ -41,14 +41,30 @@ else {
     $options = get_option('hefo');
 }
 ?>	
-
+<script>
+jQuery(document).ready(function(){
+    jQuery("textarea").focus(function() {
+        jQuery("textarea").css("height", "100px");
+        jQuery(this).css("height", "400px");
+    });
+});
+</script>
 <div class="wrap">
-    <h2>Header and Footer <small><?php echo HEADER_FOOTER; ?></small></h2>
+    <h2>Header and Footer</h2>
 
-    <div class="updated"><strong>
-        This plugin is free. If you would like to donate to support it,
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2545483" target="_blank">click here</a>.
-        </strong></div>
+<div style="border: 1px solid #6f6; background-color: #efe; padding: 10px;">
+    <table>
+        <tr>
+        <td valign="middle" align="center">
+            <a href="http://www.satollo.net/donations" target="_blank"><img src="<?php echo WP_PLUGIN_URL . '/include-me/donate.gif'; ?>"/></a></td>
+        <td valign="middle" align="left">
+            A donation is like a diamond: it's forever. There is <a href="http://www.satollo.net/donations" target="_blank">something
+            to read about donations</a>.
+        </td>
+    </tr>
+    </table>
+</div>
+
     <p>You can read the <a href="http://www.satollo.net/plugins/header-footer">Header and Footer plugin official page</a> for more information. PHP is allowed
     on textareas below.</p>
     
