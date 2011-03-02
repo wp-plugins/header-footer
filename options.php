@@ -52,17 +52,27 @@ jQuery(document).ready(function(){
 <div class="wrap">
     <h2>Header and Footer</h2>
 
-<div style="border: 1px solid #6f6; background-color: #efe; padding: 10px;">
-    <table>
-        <tr>
-        <td valign="middle" align="center">
-            <a href="http://www.satollo.net/donations" target="_blank"><img src="<?php echo WP_PLUGIN_URL . '/include-me/donate.gif'; ?>"/></a></td>
-        <td valign="middle" align="left">
-            A donation is like a diamond: it's forever. There is <a href="http://www.satollo.net/donations" target="_blank">something
-            to read about donations</a>.
-        </td>
-    </tr>
-    </table>
+<div style="border: 1px solid #6d6; border-radius: 5px; background-color: #efe; padding: 10px;">
+<table cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="middle" align="left" width="110">
+        <a href="http://www.satollo.net/donations" target="_blank"><img src="http://www.satollo.net/images/donate.gif"/></a>
+    </td>
+    <td valign="top" align="left">
+        <strong>Your donation is like a diamond: it's forever.</strong> There is <a href="http://www.satollo.net/donations" target="_blank">something
+        to read about donations</a>.
+        <br />
+        <small>My plugins:
+        <a href="http://www.satollo.net/plugins/hyper-cache">Hyper Cache</a>,
+        <a href="http://www.satollo.net/plugins/newsletter">Newsletter</a>,
+        <a href="http://www.satollo.net/plugins/include-me">Include Me</a>,
+        <a href="http://www.satollo.net/plugins/post-layout">Post Layout</a>,
+        <a href="http://www.satollo.net/plugins/postacards">Postcards</a>,
+        <a href="http://www.satollo.net/plugins/comment-notifier">Comment Notifier</a>,
+        <a href="http://www.satollo.net/plugins/comment-image">Comment Image</a>.</small>
+    </td>
+</tr>
+</table>
 </div>
 
     <p>You can read the <a href="http://www.satollo.net/plugins/header-footer">Header and Footer plugin official page</a> for more information. PHP is allowed
@@ -74,6 +84,7 @@ jQuery(document).ready(function(){
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('head_home', __('head_home', 'header-footer'), __('head hint', 'header-footer'), 'rows="4"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('head', __('head', 'header-footer'), __('head hint', 'header-footer'), 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_checkbox('og_image', 'Facebook Open Graph Image', 'Adds the Facebook Open Graph metatag with a reference to the first post image'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('footer', __('footer', 'header-footer'), __('footer hint', 'header-footer'), 'rows="10"'); ?></tr>
         </table>
 
