@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer plugin let you to add html/javascript code to the head and footer of blog pages. Goto to the admin panel to have more information or give a look to the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
-  Version: 1.1.4
+  Version: 1.1.5
   Author: Satollo
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -41,14 +41,22 @@ add_action('wp_head', 'hefo_wp_head', 1);
 function hefo_wp_head() {
     global $hefo_options, $wp_query;
     // Add it as higer as possible, Facebook reads only the first part of a page
-    if ($hefo_options['og_image'] && is_single()) {
-        $xid = $wp_query->get_queried_object_id();
-        $xattachments = get_children(array('post_parent' => $xid, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order'));
-        if (!empty($xattachments)) {
-            foreach ($xattachments as $id => $attachment) {
-                $ximage = wp_get_attachment_image_src($id, 'thumbnail');
-                echo '<meta property="og:image" content="' . $ximage[0] . '" />';
+    if ($hefo_options['og_image']) {
+        if (is_single() || is_page()) {
+            $xid = $wp_query->get_queried_object_id();
+            $xattachments = get_children(array('post_parent' => $xid, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order'));
+            if (!empty($xattachments)) {
+                foreach ($xattachments as $id => $attachment) {
+                    $ximage = wp_get_attachment_image_src($id, 'thumbnail');
+                    echo '<meta property="og:image" content="' . $ximage[0] . '" />';
+                }
             }
+            else {
+                echo '<meta property="og:image" content="' . $hefo_options['og_image_default'] . '" />';
+            }
+        }
+        else {
+            echo '<meta property="og:image" content="' . $hefo_options['og_image_default'] . '" />';
         }
     }
 

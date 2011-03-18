@@ -18,6 +18,18 @@ function hefo_field_checkbox($name, $label='', $tips='', $attrs='') {
     echo '</td>';
 }
 
+function hefo_field_text($name, $label='', $tips='', $attrs='') {
+    global $options;
+
+
+    echo '<th scope="row">';
+    echo '<label for="options[' . $name . ']">' . $label . '</label></th>';
+    echo '<td><input type="text" name="options[' . $name . ']" value="' .
+        htmlspecialchars($options[$name]) . '" size="50"/>';
+    echo '<br /> ' . $tips;
+    echo '</td>';
+}
+
 function hefo_field_textarea($name, $label='', $tips='', $attrs='') {
     global $options;
 
@@ -85,6 +97,7 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('head_home', __('head_home', 'header-footer'), __('head hint', 'header-footer'), 'rows="4"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('head', __('head', 'header-footer'), __('head hint', 'header-footer'), 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_checkbox('og_image', 'Facebook Open Graph Image', 'Adds the Facebook Open Graph metatag with a reference to the first post image'); ?></tr>
+            <tr valign="top"><?php hefo_field_text('og_image_default', 'Facebook Open Graph Default Image', 'If no image can be extracted, use this image URL'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('footer', __('footer', 'header-footer'), __('footer hint', 'header-footer'), 'rows="10"'); ?></tr>
         </table>
 
