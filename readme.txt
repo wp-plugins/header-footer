@@ -45,3 +45,9 @@ No questions have been asked.
 == Screenshots ==
 
 No screenshots are available.
+
+== Changelog ==
+
+= 1.1.6 =
+
+* fixed the Facebook og:image meta tag
