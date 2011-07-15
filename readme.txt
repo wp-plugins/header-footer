@@ -1,12 +1,12 @@
 === Header-Footer ===
-Tags: header, footer, blog, page, single, post, head, tracking
-Requires at least: 2.1
-Tested up to: 3.0.4
+Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads
+Requires at least: 2.9
+Tested up to: 3.2.1
 Stable tag: trunk
 Donate link: http://www.satollo.net/donations
 Contributors: satollo
 
-Header and Footer plugin let you to add html code to the header and to the footer.
+Header and Footer plugin let you to add html code to the head and footer sections of your blog... and more!
 
 == Description ==
 
@@ -16,21 +16,44 @@ tradedoubler verification code (and so on...) on head of footer section of your 
 pages?
 
 With Header and Footer plugin you can just copy the code those services give you
-in a textarea. No other to do.
+in a centralized point to manage them all.
+
+* manage the head section code
+* manage the footer code
+* manage the facebook og:image tag
+* manage codes to be added before and after post content (social buttons, ads, ...)
+* PDF manual with eamples
+* recognize and execute PHP code to add logic
+
+Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
 
 == Versions ==
 
-1.0.6
-    - WP 2.7.1 compatibility check
+= 1.2.0
 
-1.0.5
-    - added the german translation by Ev. Jugend Schwandorf - Sebastian M�ller (http://www.ej-schwandorf.de)
+* compatibility check with WordPress 3.2.1
+* updated the Facebook Open Graph image tag (og:image)
+* integrated with WordPress media gallery image picker and uploader
+* some CSS changes
+* added the Satollo.net news iframe
+* added configurations to inject code before and after posts
+* added a PDF manual
 
-1.0.4
-    - fixed the usage of short php tag
+= 1.0.6
 
-1.0.3
-	- added the "only home" header text
+* WP 2.7.1 compatibility check
+
+= 1.0.5
+
+* added the german translation by Ev. Jugend Schwandorf - Sebastian M�ller (http://www.ej-schwandorf.de)
+
+= 1.0.4
+
+* fixed the usage of short php tag
+
+= 1.0.3
+
+* added the "only home" header text
 
 == Installation ==
 

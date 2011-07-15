@@ -59,36 +59,35 @@ jQuery(document).ready(function(){
         jQuery("textarea").css("height", "100px");
         jQuery(this).css("height", "400px");
     });
+
+    jQuery('#upload-image').click(function() {
+        tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+        return false;
+    });
+
+    window.send_to_editor = function(html) {
+        var imgurl = jQuery('img',html).attr('src');
+        jQuery('#og_image_default').val(imgurl);
+        tb_remove();
+    }
 });
 </script>
+<style>
+    table.form-table th {
+        font-weight: bold;
+    }
+    table.form-table textarea {
+        font-family: monospace;
+    }
+</style>
 <div class="wrap">
     <h2>Header and Footer</h2>
 
-<div style="border: 1px solid #6d6; border-radius: 5px; background-color: #efe; padding: 10px;">
-<table cellpadding="0" cellspacing="0">
-    <tr>
-    <td valign="middle" align="left" width="110">
-        <a href="http://www.satollo.net/donations" target="_blank"><img src="http://www.satollo.net/images/donate.gif"/></a>
-    </td>
-    <td valign="top" align="left">
-        <strong>Your donation is like a diamond: it's forever.</strong> There is <a href="http://www.satollo.net/donations" target="_blank">something
-        to read about donations</a>.
-        <br />
-        <small>My plugins:
-        <a href="http://www.satollo.net/plugins/hyper-cache">Hyper Cache</a>,
-        <a href="http://www.satollo.net/plugins/newsletter">Newsletter</a>,
-        <a href="http://www.satollo.net/plugins/include-me">Include Me</a>,
-        <a href="http://www.satollo.net/plugins/post-layout">Post Layout</a>,
-        <a href="http://www.satollo.net/plugins/postacards">Postcards</a>,
-        <a href="http://www.satollo.net/plugins/comment-notifier">Comment Notifier</a>,
-        <a href="http://www.satollo.net/plugins/comment-image">Comment Image</a>.</small>
-    </td>
-</tr>
-</table>
-</div>
+    <iframe src="http://frames.satollo.net/header-footer.php" frameborder="0" width="100%" height="80" style="border: 0"></iframe>
 
-    <p>You can read the <a href="http://www.satollo.net/plugins/header-footer">Header and Footer plugin official page</a> for more information. PHP is allowed
-    on textareas below.</p>
+    <p>You can read the <a href="http://www.satollo.net/plugins/header-footer">Header and Footer plugin official page</a> for more information and
+        where there is the <strong>PDF manual</strong>.</p>
+    <p>PHP is allowed on textareas below, see the manual.</p>
     
     <form method="post">
         <?php wp_nonce_field('save') ?>
@@ -97,8 +96,19 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('head_home', __('head_home', 'header-footer'), __('head hint', 'header-footer'), 'rows="4"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('head', __('head', 'header-footer'), __('head hint', 'header-footer'), 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_checkbox('og_image', 'Facebook Open Graph Image', 'Adds the Facebook Open Graph metatag with a reference to the first post image'); ?></tr>
-            <tr valign="top"><?php hefo_field_text('og_image_default', 'Facebook Open Graph Default Image', 'If no image can be extracted, use this image URL'); ?></tr>
+            <tr valign="top">
+                <th scope="row">
+                    <label for="options[' . $name . ']">Facebook Open Graph Default Image</label></th>
+                    <td>
+                        <input type="text" id="og_image_default" name="options[og_image_default]" value="<?php echo htmlspecialchars($options['og_image_default']); ?>" size="50"/>
+                        <input type="button" id="upload-image" value="Select/Upload an image"/>
+                        <br />
+                        If no image can be extracted, use this image URL
+                    </td>
+            </tr>
             <tr valign="top"><?php hefo_field_textarea('footer', __('footer', 'header-footer'), __('footer hint', 'header-footer'), 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('before', 'Code to be inserted before each post', '', 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('after', 'Code to be inserted after each post', '', 'rows="10"'); ?></tr>
         </table>
 
         <p class="submit"><input type="submit" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
