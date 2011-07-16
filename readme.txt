@@ -29,7 +29,7 @@ Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
 
 == Versions ==
 
-= 1.2.0
+= 1.2.0 =
 
 * compatibility check with WordPress 3.2.1
 * updated the Facebook Open Graph image tag (og:image)
@@ -39,19 +39,19 @@ Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
 * added configurations to inject code before and after posts
 * added a PDF manual
 
-= 1.0.6
+= 1.0.6 =
 
 * WP 2.7.1 compatibility check
 
-= 1.0.5
+= 1.0.5 =
 
 * added the german translation by Ev. Jugend Schwandorf - Sebastian M�ller (http://www.ej-schwandorf.de)
 
-= 1.0.4
+= 1.0.4 =
 
 * fixed the usage of short php tag
 
-= 1.0.3
+= 1.0.3 =
 
 * added the "only home" header text
 
