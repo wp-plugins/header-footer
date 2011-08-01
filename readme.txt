@@ -28,6 +28,10 @@ in a centralized point to manage them all.
 Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
 
 == Versions ==
+= 1.3.0 =
+
+* added configuration to inject code before and after pages
+* small graphical changes
 
 = 1.2.0 =
 
@@ -67,7 +71,7 @@ No questions have been asked.
 
 == Screenshots ==
 
-No screenshots are available.
+1. The configuration panel of Header and Footer.
 
 == Changelog ==
 

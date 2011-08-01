@@ -79,6 +79,9 @@ jQuery(document).ready(function(){
     table.form-table textarea {
         font-family: monospace;
     }
+    h3 {
+        border-bottom: 1px solid #000;
+    }
 </style>
 <div class="wrap">
     <h2>Header and Footer</h2>
@@ -95,6 +98,11 @@ jQuery(document).ready(function(){
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('head_home', __('head_home', 'header-footer'), __('head hint', 'header-footer'), 'rows="4"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('head', __('head', 'header-footer'), __('head hint', 'header-footer'), 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('footer', __('footer', 'header-footer'), __('footer hint', 'header-footer'), 'rows="10"'); ?></tr>
+        </table>
+
+        <h3>Facebook</h3>
+        <table class="form-table">
             <tr valign="top"><?php hefo_field_checkbox('og_image', 'Facebook Open Graph Image', 'Adds the Facebook Open Graph metatag with a reference to the first post image'); ?></tr>
             <tr valign="top">
                 <th scope="row">
@@ -106,9 +114,14 @@ jQuery(document).ready(function(){
                         If no image can be extracted, use this image URL
                     </td>
             </tr>
-            <tr valign="top"><?php hefo_field_textarea('footer', __('footer', 'header-footer'), __('footer hint', 'header-footer'), 'rows="10"'); ?></tr>
+        </table>
+
+        <h3>Posts and pages</h3>
+        <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('before', 'Code to be inserted before each post', '', 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('after', 'Code to be inserted after each post', '', 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('page_before', 'Code to be inserted before each page', '', 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('page_after', 'Code to be inserted after each page', '', 'rows="10"'); ?></tr>
         </table>
 
         <p class="submit"><input type="submit" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
