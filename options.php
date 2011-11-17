@@ -52,8 +52,10 @@ if (isset($_POST['save'])) {
 else {
     $options = get_option('hefo');
 }
+
 ?>	
 <script>
+var tabs;
 jQuery(document).ready(function(){
     jQuery("textarea").focus(function() {
         jQuery("textarea").css("height", "100px");
@@ -70,39 +72,63 @@ jQuery(document).ready(function(){
         jQuery('#og_image_default').val(imgurl);
         tb_remove();
     }
+
+    jQuery(function() {
+        tabs = jQuery("#tabs").tabs({selected: <?php echo (int)$options['tab']; ?>});
+    });
 });
 </script>
-<style>
-    table.form-table th {
-        font-weight: bold;
-    }
-    table.form-table textarea {
-        font-family: monospace;
-    }
-    h3 {
-        border-bottom: 1px solid #000;
-    }
-</style>
 <div class="wrap">
     <h2>Header and Footer</h2>
 
     <iframe src="http://frames.satollo.net/header-footer.php" frameborder="0" width="100%" height="80" style="border: 0"></iframe>
 
-    <p>You can read the <a href="http://www.satollo.net/plugins/header-footer">Header and Footer plugin official page</a> for more information and
-        where there is the <strong>PDF manual</strong>.</p>
-    <p>PHP is allowed on textareas below, see the manual.</p>
+    <p>Detailed documentation and FAQs can be found online on <a href="http://www.satollo.net/plugins/header-footer"><strong>Header and Footer plugin official page</strong></a>.</p>
+    <p>PHP is allowed on textareas below. If you use bbPress, read the official page.</p>
     
-    <form method="post">
+    <form method="post" action="" onsubmit="this.elements['options[tab]'].value=tabs.tabs('option', 'selected'); return true;">
         <?php wp_nonce_field('save') ?>
+        <input type="hidden" name="options[tab]" value="<?php echo (int)$options['tab']; ?>"/>
 
+   
+    <div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Page head and footer</a></li>
+        <li><a href="#tabs-2">Post content</a></li>
+        <li><a href="#tabs-3">Page content</a></li>
+        <li><a href="#tabs-4">Facebook</a></li>
+    </ul>
+        
+        <div id="tabs-1">
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('head_home', __('head_home', 'header-footer'), __('head hint', 'header-footer'), 'rows="4"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('head', __('head', 'header-footer'), __('head hint', 'header-footer'), 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('footer', __('footer', 'header-footer'), __('footer hint', 'header-footer'), 'rows="10"'); ?></tr>
         </table>
+        </div>
+        
 
-        <h3>Facebook</h3>
+
+        <div id="tabs-2">
+        <!--<h3>Posts and pages</h3>-->
         <table class="form-table">
+            <tr valign="top"><?php hefo_field_textarea('before', 'Code to be inserted before each post', '', 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('after', 'Code to be inserted after each post', '', 'rows="10"'); ?></tr>
+        </table>
+        </div>
+        
+        <div id="tabs-3">
+        <table class="form-table">
+            <tr valign="top"><?php hefo_field_textarea('page_before', 'Code to be inserted before each page', '', 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('page_after', 'Code to be inserted after each page', '', 'rows="10"'); ?></tr>
+        </table>
+        </div>
+        
+        <div id="tabs-4">
+        <!--<h3>Facebook</h3>-->
+        <table class="form-table">
+            <tr valign="top"><?php hefo_field_text('og_type', 'Facebook page type for the generic web page', 'Usually "article" is the right choice, if empty will be skipped'); ?></tr>
+            <tr valign="top"><?php hefo_field_text('og_type_home', 'Facebook page type for the home', 'Usually "blog" is a good choice, if empty will be used the generic type'); ?></tr>
             <tr valign="top"><?php hefo_field_checkbox('og_image', 'Facebook Open Graph Image', 'Adds the Facebook Open Graph metatag with a reference to the first post image'); ?></tr>
             <tr valign="top">
                 <th scope="row">
@@ -111,20 +137,13 @@ jQuery(document).ready(function(){
                         <input type="text" id="og_image_default" name="options[og_image_default]" value="<?php echo htmlspecialchars($options['og_image_default']); ?>" size="50"/>
                         <input type="button" id="upload-image" value="Select/Upload an image"/>
                         <br />
-                        If no image can be extracted, use this image URL
+                        If no image can be extracted from a post, use this image URL.
                     </td>
             </tr>
         </table>
-
-        <h3>Posts and pages</h3>
-        <table class="form-table">
-            <tr valign="top"><?php hefo_field_textarea('before', 'Code to be inserted before each post', '', 'rows="10"'); ?></tr>
-            <tr valign="top"><?php hefo_field_textarea('after', 'Code to be inserted after each post', '', 'rows="10"'); ?></tr>
-            <tr valign="top"><?php hefo_field_textarea('page_before', 'Code to be inserted before each page', '', 'rows="10"'); ?></tr>
-            <tr valign="top"><?php hefo_field_textarea('page_after', 'Code to be inserted after each page', '', 'rows="10"'); ?></tr>
-        </table>
-
-        <p class="submit"><input type="submit" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
+        </div>
+    </div>
+    <p class="submit"><input type="submit" class="button" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
 
     </form>
 </div>

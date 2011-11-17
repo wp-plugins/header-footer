@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Satollo.net lets to add html/javascript code to the head and footer of your blog. Some explaes are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
-  Version: 1.3.0
+  Version: 1.3.1
   Author: Satollo
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -33,10 +33,23 @@ $hefo_options = get_option('hefo');
 add_action('admin_init', 'hefo_admin_init');
 function hefo_admin_init() {
     if (strpos($_GET['page'], 'header-footer/') === 0) {
+        wp_enqueue_script('jquery-ui-tabs');
         wp_enqueue_script('media-upload');
         wp_enqueue_script('thickbox');
         wp_enqueue_style('thickbox');
     }
+}
+
+add_action('admin_head', 'hefo_admin_head');
+function hefo_admin_head()
+{
+    if (strpos($_GET['page'], 'header-footer/') === 0) {
+        echo '<link type="text/css" rel="stylesheet" href="' .
+        get_option('siteurl') . '/wp-content/plugins/newsletter-pro/style.css"/>';
+        echo '<link type="text/css" rel="stylesheet" href="' .
+        get_option('siteurl') . '/wp-content/plugins/newsletter-pro/jquery-ui.css"/>';
+    }
+
 }
 
 add_action('admin_menu', 'hefo_admin_menu');
@@ -45,14 +58,28 @@ function hefo_admin_menu() {
     add_options_page('Header and Footer', 'Header and Footer', 'manage_options', 'header-footer/options.php');
 }
 
-add_action('wp_head', 'hefo_wp_head', 1);
-
-function hefo_wp_head() {
+add_action('wp_head', 'hefo_wp_head_pre', 1);
+function hefo_wp_head_pre() {
     global $hefo_options, $wp_query;
+    
+    if (is_home()) {
+        if (empty($hefo_options['og_type_home'])) $hefo_options['og_type_home'] = $hefo_options['og_type'];
+        if (!empty($hefo_options['og_type_home'])) echo '<meta property="og:type" content="' . $hefo_options['og_type_home'] . '" />';
+    }
+    else {
+        if (!empty($hefo_options['og_type'])) echo '<meta property="og:type" content="' . $hefo_options['og_type'] . '" />';
+    }
+    
     // Add it as higer as possible, Facebook reads only the first part of a page
-    if ($hefo_options['og_image']) {
+    if (isset($hefo_options['og_image'])) {
         if (is_single() || is_page()) {
             $xid = $wp_query->get_queried_object_id();
+            if (function_exists('bbp_get_topic_forum_id')) {
+                $object = $wp_query->get_queried_object();
+                if ($object != null && $object->post_type == 'topic') {
+                    $xid = bbp_get_topic_forum_id($xid);
+                }
+            }
             $xtid = function_exists('get_post_thumbnail_id')?get_post_thumbnail_id($xid):false;
             if ($xtid) {
                 $ximage = wp_get_attachment_image_src($xtid, 'thumbnail');
@@ -68,16 +95,24 @@ function hefo_wp_head() {
                     }
                 }
                 else {
-                    echo '<meta property="og:image" content="' . $hefo_options['og_image_default'] . '" />';
+                    if (!empty($hefo_options['og_image_default'])) {
+                        echo '<meta property="og:image" content="' . $hefo_options['og_image_default'] . '" />';
+                    }
                 }
             }
         }
         else {
-            echo '<meta property="og:image" content="' . $hefo_options['og_image_default'] . '" />';
+            if (!empty($hefo_options['og_image_default'])) {
+                echo '<meta property="og:image" content="' . $hefo_options['og_image_default'] . '" />';
+            }
         }
     }
+}
 
+add_action('wp_head', 'hefo_wp_head_post', 11);
 
+function hefo_wp_head_post() {
+    global $hefo_options;
     $buffer = '';
     if (is_home ()) $buffer .= $hefo_options['head_home'];
 

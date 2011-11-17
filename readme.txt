@@ -28,6 +28,15 @@ in a centralized point to manage them all.
 Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
 
 == Versions ==
+
+= 1.3.1 =
+
+* Added bbPress "compatibility" for og:image Facebook meta tag
+* Administration panel tabbed
+* Added Facebook og:type support
+* Fix the og:image on home page when there is no default image specified
+* Facebook og: tags added earlier on head section that other codes
+
 = 1.3.0 =
 
 * added configuration to inject code before and after pages
