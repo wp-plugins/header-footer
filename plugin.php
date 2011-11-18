@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Satollo.net lets to add html/javascript code to the head and footer of your blog. Some explaes are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
-  Version: 1.3.1
+  Version: 1.3.3
   Author: Satollo
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -45,9 +45,9 @@ function hefo_admin_head()
 {
     if (strpos($_GET['page'], 'header-footer/') === 0) {
         echo '<link type="text/css" rel="stylesheet" href="' .
-        get_option('siteurl') . '/wp-content/plugins/newsletter-pro/style.css"/>';
+        get_option('siteurl') . '/wp-content/plugins/header-footer/jquery-ui.css"/>';
         echo '<link type="text/css" rel="stylesheet" href="' .
-        get_option('siteurl') . '/wp-content/plugins/newsletter-pro/jquery-ui.css"/>';
+        get_option('siteurl') . '/wp-content/plugins/header-footer/style.css"/>';
     }
 
 }

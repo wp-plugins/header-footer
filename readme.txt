@@ -45,6 +45,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.3.3 =
+
+* Fixed the not loading CSS and sone layout problems
+
 = 1.3.2 =
 
 * Fixed the readme file...
