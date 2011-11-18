@@ -1,6 +1,6 @@
 <?php
 if (function_exists('load_plugin_textdomain')) {
-    load_plugin_textdomain('header-footer', 'wp-content/plugins/header-footer');
+    //load_plugin_textdomain('header-footer', 'wp-content/plugins/header-footer');
 }
 
 function hefo_request($name, $default=null) {
@@ -101,9 +101,9 @@ jQuery(document).ready(function(){
         
         <div id="tabs-1">
         <table class="form-table">
-            <tr valign="top"><?php hefo_field_textarea('head_home', __('head_home', 'header-footer'), __('head hint', 'header-footer'), 'rows="4"'); ?></tr>
-            <tr valign="top"><?php hefo_field_textarea('head', __('head', 'header-footer'), __('head hint', 'header-footer'), 'rows="10"'); ?></tr>
-            <tr valign="top"><?php hefo_field_textarea('footer', __('footer', 'header-footer'), __('footer hint', 'header-footer'), 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('head_home', 'Code to be added on HEAD section of the home', '', 'rows="4"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('head', 'Code to be added on HEAD section of every page', 'It will be added on HEAD section of the home as well', 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('footer', 'Code to be added before the end of the page', 'It work if your theme has the wp_footer call. It should be just before the &lt;/body&gt; closing tag', 'rows="10"'); ?></tr>
         </table>
         </div>
         

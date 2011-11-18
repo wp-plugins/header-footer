@@ -27,7 +27,29 @@ in a centralized point to manage them all.
 
 Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
 
-== Versions ==
+== Installation ==
+
+1. Put the plugin folder into [wordpress_dir]/wp-content/plugins/
+2. Go into the WordPress admin interface and activate the plugin
+3. Optional: go to the options page and configure the plugin
+
+== Frequently Asked Questions ==
+
+FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-footer) page.
+
+== Screenshots ==
+
+1. Configuration panel for blog HEAD and footer sections
+2. Configuration panel for post content
+3. Configuration panel for Facebook "og" tags
+
+== Changelog ==
+
+= 1.3.2 =
+
+* Fixed the readme file...
+* Fixed some labels
+* Added the screenshots (hope they'll show up this time...)
 
 = 1.3.1 =
 
@@ -67,23 +89,3 @@ Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
 = 1.0.3 =
 
 * added the "only home" header text
-
-== Installation ==
-
-1. Put the plugin folder into [wordpress_dir]/wp-content/plugins/
-2. Go into the WordPress admin interface and activate the plugin
-3. Optional: go to the options page and configure the plugin
-
-== Frequently Asked Questions ==
-
-No questions have been asked.
-
-== Screenshots ==
-
-1. The configuration panel of Header and Footer.
-
-== Changelog ==
-
-= 1.1.6 =
-
-* fixed the Facebook og:image meta tag
