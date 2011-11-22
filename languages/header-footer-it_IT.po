@@ -1,0 +1,143 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: options.php:87
+#@ default
+msgid "Detailed documentation and FAQs can be found online on <a href=\"http://www.satollo.net/plugins/header-footer\"><strong>Header and Footer plugin official page</strong></a>."
+msgstr ""
+
+#: options.php:88
+#@ default
+msgid "PHP is allowed on textareas below."
+msgstr ""
+
+#: options.php:88
+#@ default
+msgid "If you use bbPress, read the official page."
+msgstr ""
+
+#: options.php:97
+#@ header-footer
+msgid "Page head and footer"
+msgstr "Testata e fondo pagina"
+
+#: options.php:98
+#@ header-footer
+msgid "Post content"
+msgstr "Contenuto articoli"
+
+#: options.php:99
+#@ header-footer
+msgid "Page content"
+msgstr "Contenuto pagine"
+
+#: options.php:100
+#@ header-footer
+msgid "Facebook"
+msgstr ""
+
+#: options.php:105
+#@ header-footer
+msgid "Code to be added on HEAD section of the home"
+msgstr "Codice da inserire nella sezione HEAD della home page"
+
+#: options.php:106
+#@ header-footer
+msgid "Code to be added on HEAD section of every page"
+msgstr "Codice da inserire nella sezione HEAD di ogni pagina"
+
+#: options.php:149
+#@ header-footer
+msgid "save"
+msgstr "Salva"
+
+#: options.php:107
+#@ header-footer
+msgid "Code to be added before the end of the page"
+msgstr "Codice da inserire prima della fine di ogni pagina"
+
+#: options.php:116
+#@ header-footer
+msgid "Code to be inserted before each post"
+msgstr "Codice da inserire prima di ogni articolo"
+
+#: options.php:117
+#@ header-footer
+msgid "Code to be inserted after each post"
+msgstr "Codice da inserire dopo ogni articolo"
+
+#: options.php:123
+#@ header-footer
+msgid "Code to be inserted before each page"
+msgstr "Codice da inserire prima di ogni pagina"
+
+#: options.php:124
+#@ header-footer
+msgid "Code to be inserted after each page"
+msgstr "Codice da inserire dopo ogni pagina"
+
+#: options.php:131
+#@ header-footer
+msgid "Facebook page type for the generic web page"
+msgstr "Tipo per Facebook della pagina generica"
+
+#: options.php:131
+#@ header-footer
+msgid "Usually \"article\" is the right choice, if empty will be skipped"
+msgstr "Il tipo \"article\" è quello migliore, se non impostato viene saltato"
+
+#: options.php:132
+#@ header-footer
+msgid "Facebook page type for the home"
+msgstr "Tipo per Facebook della home page"
+
+#: options.php:132
+#@ header-footer
+msgid "Usually \"blog\" is a good choice, if empty will be used the generic type"
+msgstr "Il tipo \"blog\" è il migliore, se vuoto viene usato il tipo per la pagina generica"
+
+#: options.php:133
+#@ header-footer
+msgid "Facebook Open Graph Image"
+msgstr "Immagine per Facebook"
+
+#: options.php:133
+#@ header-footer
+msgid "Adds the Facebook Open Graph metatag with a reference to the first post image"
+msgstr "Aggiunge un codice perché Facebook utilizzi la prima immagine dell'articolo"
+
+#: options.php:136
+#@ default
+msgid "Facebook Open Graph default image"
+msgstr ""
+
+#: options.php:141
+#@ default
+msgid "If no image can be extracted from a post, that image URL will be used (if present)."
+msgstr ""
+
+#: options.php:142
+#@ default
+msgid ""
+"<strong>Warning.</strong> On some versions of WordPress after the image selection button is pressed the tabs above does not change anymore. Just save so\n"
+"                        this page is reloaded (<a href=\"http://wordpress.org/support/topic/wp-32-thickbox-jquery-ui-tabs-conflict\" target=\"_blank\">reference</a>)."
+msgstr ""
+
