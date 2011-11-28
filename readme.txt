@@ -1,4 +1,4 @@
-=== Header-Footer ===
+=== Header and Footer ===
 Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads
 Requires at least: 2.9
 Tested up to: 3.2.1
