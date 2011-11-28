@@ -3,15 +3,15 @@
 /*
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
-  Description: Header and Footer by Satollo.net lets to add html/javascript code to the head and footer of your blog. Some explaes are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
-  Version: 1.3.4
+  Description: Header and Footer by Satollo.net lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
+  Version: 1.3.5
   Author: Satollo
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
  */
 
 /*
-  Copyright 2008-2010  Satollo  (email : info@satollo.net)
+  Copyright 2008-2011 Satollo  (email : info@satollo.net)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -112,11 +112,11 @@ function hefo_wp_head_pre() {
 add_action('wp_head', 'hefo_wp_head_post', 11);
 
 function hefo_wp_head_post() {
-    global $hefo_options;
+    global $hefo_options, $wp_query, $wpdb;
     $buffer = '';
-    if (is_home ()) $buffer .= $hefo_options['head_home'];
+    if (is_home ()) $buffer .= hefo_replace($hefo_options['head_home']);
 
-    $buffer .= $hefo_options['head'];
+    $buffer .= hefo_replace($hefo_options['head']);
 
     ob_start();
     eval('?>' . $buffer);
@@ -130,7 +130,7 @@ add_action('wp_footer', 'hefo_wp_footer');
 function hefo_wp_footer() {
     global $hefo_options;
 
-    $buffer = $hefo_options['footer'];
+    $buffer = hefo_replace($hefo_options['footer']);
 
     ob_start();
     eval('?>' . $buffer);
@@ -142,19 +142,28 @@ function hefo_wp_footer() {
 add_action('the_content', 'hefo_the_content');
 
 function hefo_the_content($content) {
-    global $hefo_options;
+    global $hefo_options, $wpdb, $post;
 
     if (!is_singular()) return $content;
 
     if (is_page()) {
-        $before = hefo_execute($hefo_options['page_before']);
-        $after = hefo_execute($hefo_options['page_after']);
+        $before = hefo_execute(hefo_replace($hefo_options['page_before']));
+        $after = hefo_execute(hefo_replace($hefo_options['page_after']));
     }
     else {
-        $before = hefo_execute($hefo_options['before']);
-        $after = hefo_execute($hefo_options['after']);
+        $before = hefo_execute(hefo_replace($hefo_options['before']));
+        $after = hefo_execute(hefo_replace($hefo_options['after']));
     }
     return $before . $content . $after;
+}
+
+function hefo_replace($buffer) {
+    global $hefo_options;
+    
+    for ($i=1; $i<=5; $i++) {
+        $buffer = str_replace('[snippet_' . $i . ']', $hefo_options['snippet_' . $i], $buffer);
+    }
+    return $buffer;
 }
 
 function hefo_execute($buffer) {

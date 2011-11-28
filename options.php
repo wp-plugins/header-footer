@@ -98,6 +98,8 @@ jQuery(document).ready(function(){
         <li><a href="#tabs-2"><?php _e('Post content', 'header-footer'); ?></a></li>
         <li><a href="#tabs-3"><?php _e('Page content', 'header-footer'); ?></a></li>
         <li><a href="#tabs-4"><?php _e('Facebook', 'header-footer'); ?></a></li>
+        <li><a href="#tabs-5"><?php _e('Snippets', 'header-footer'); ?></a></li>
+        <li><a href="#tabs-6"><?php _e('Notes and...', 'header-footer'); ?></a></li>
     </ul>
         
         <div id="tabs-1">
@@ -145,6 +147,25 @@ jQuery(document).ready(function(){
             </tr>
         </table>
         </div>
+
+        <div id="tabs-5">
+        <p>
+            <?php _e('Common snippets that can be used in any header or footer area referring them as [snippet_N] where N is the snippet number
+            from 1 to 5. Snippets are inserted before PHP evaluation.', 'header-footer'); ?><br />
+            <?php _e('Useful for social button to be placed before and after the post or in posts and pages.', 'header-footer'); ?>
+        </p>
+        <table class="form-table">
+            <? for ($i=1; $i<=5; $i++) { ?>
+            <tr valign="top"><?php hefo_field_textarea('snippet_' . $i, __('Snippet ' . $i, 'header-footer'), '', 'rows="10"'); ?></tr>
+            <? } ?>
+        </table>
+        </div>        
+
+        <div id="tabs-6">
+        <table class="form-table">
+            <tr valign="top"><?php hefo_field_textarea('notes', __('Notes and parked codes', 'header-footer'), '', 'rows="10"'); ?></tr>
+        </table>
+        </div>        
     </div>
     <p class="submit"><input type="submit" class="button" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
 

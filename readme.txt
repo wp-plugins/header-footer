@@ -45,6 +45,12 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.3.5 =
+
+* Added notes and parked codes
+* Added code snippets
+* $post made global for post and page header and footer
+
 = 1.3.4 =
 
 * Added an important note about tabs and image selection on the facebook tab, only informative
