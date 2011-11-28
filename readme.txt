@@ -22,7 +22,7 @@ in a centralized point to manage them all.
 * manage the footer code
 * manage the facebook og:image tag
 * manage codes to be added before and after post content (social buttons, ads, ...)
-* PDF manual with eamples
+* PDF manual with examples
 * recognize and execute PHP code to add logic
 
 Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
