@@ -4,7 +4,6 @@ Requires at least: 2.9
 Tested up to: 3.2.1
 Stable tag: trunk
 Donate link: http://www.satollo.net/donations
-Contributors: satollo
 
 Header and Footer plugin let you to add html code to the head and footer sections of your blog... and more!
 
@@ -44,6 +43,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 3. Configuration panel for Facebook "og" tags
 
 == Changelog ==
+
+= 1.3.7 =
+
+* Added the init configuration
 
 = 1.3.5 =
 

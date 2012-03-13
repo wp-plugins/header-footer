@@ -4,8 +4,8 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Satollo.net lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
-  Version: 1.3.5
-  Author: Satollo
+  Version: 1.3.7
+  Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
  */
@@ -30,6 +30,18 @@
 
 $hefo_options = get_option('hefo');
 
+add_action('init', 'hefo_init');
+function hefo_init() {
+  global $hefo_options;
+  
+  if (!empty($hefo_options['init'])) {
+    ob_start();
+    eval($hefo_options['init']);
+    ob_end_clean();
+  }
+}
+
+  
 add_action('admin_init', 'hefo_admin_init');
 function hefo_admin_init() {
     if (strpos($_GET['page'], 'header-footer/') === 0) {
@@ -139,6 +151,30 @@ function hefo_wp_footer() {
     echo $buffer;
 }
 
+// BBPRESS
+$bbp_reply_count = 0;
+
+add_action('bbp_theme_before_reply_content', 'hefo_bbp_theme_before_reply_content');
+function hefo_bbp_theme_before_reply_content() {
+    global $hefo_options, $wpdb, $post, $bbp_reply_count;
+    $bbp_reply_count++;
+    echo hefo_execute(hefo_replace($hefo_options['bbp_theme_before_reply_content']));
+}
+
+add_action('bbp_theme_after_reply_content', 'hefo_bbp_theme_after_reply_content');
+function hefo_bbp_theme_after_reply_content() {
+    global $hefo_options, $wpdb, $post, $bbp_reply_count;
+    
+    echo hefo_execute(hefo_replace($hefo_options['bbp_theme_after_reply_content']));
+}
+
+add_action('bbp_template_before_single_topic', 'hefo_bbp_template_before_single_topic');
+function hefo_bbp_template_before_single_topic() {
+    global $hefo_options, $wpdb, $post;
+    
+    echo hefo_execute(hefo_replace($hefo_options['bbp_template_before_single_topic']));
+}
+
 add_action('the_content', 'hefo_the_content');
 
 function hefo_the_content($content) {
@@ -159,7 +195,7 @@ function hefo_the_content($content) {
 
 function hefo_replace($buffer) {
     global $hefo_options;
-    
+    if (empty($buffer)) return '';
     for ($i=1; $i<=5; $i++) {
         $buffer = str_replace('[snippet_' . $i . ']', $hefo_options['snippet_' . $i], $buffer);
     }
@@ -167,6 +203,7 @@ function hefo_replace($buffer) {
 }
 
 function hefo_execute($buffer) {
+    if (empty($buffer)) return '';
     ob_start();
     eval('?>' . $buffer);
     $buffer = ob_get_contents();
