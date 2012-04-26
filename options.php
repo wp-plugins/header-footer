@@ -142,7 +142,7 @@ jQuery(document).ready(function(){
         <li><a href="#tabs-4"><?php _e('Facebook', 'header-footer'); ?></a></li>
         <li><a href="#tabs-5"><?php _e('Snippets', 'header-footer'); ?></a></li>
         <li><a href="#tabs-6"><?php _e('BBPress', 'header-footer'); ?></a></li>
-        <li><a href="#tabs-8"><?php _e('Advanced', 'header-footer'); ?></a></li>
+        <!--<li><a href="#tabs-8"><?php _e('Advanced', 'header-footer'); ?></a></li>-->
         <li><a href="#tabs-7"><?php _e('Notes and...', 'header-footer'); ?></a></li>
     </ul>
        
@@ -221,13 +221,15 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('bbp_template_before_single_topic', __('Before single topic', 'header-footer'), 'Hook: bbp_template_before_single_topic', 'rows="10"'); ?></tr>
         </table>
             
-        </div>        
+        </div>  
       
+        <!--
         <div id="tabs-8">
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('init', __('PHP code to be executed on plugin init', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>        
+        -->
         
         <div id="tabs-7">
         <table class="form-table">

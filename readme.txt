@@ -1,7 +1,7 @@
 === Header and Footer ===
 Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads
 Requires at least: 2.9
-Tested up to: 3.2.1
+Tested up to: 3.2.2
 Stable tag: trunk
 Donate link: http://www.satollo.net/donations
 
@@ -43,6 +43,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 3. Configuration panel for Facebook "og" tags
 
 == Changelog ==
+
+= 1.3.8 =
+
+* Removed the init configuration, too much dangerous
 
 = 1.3.7 =
 
