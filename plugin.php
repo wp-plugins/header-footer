@@ -74,6 +74,10 @@ add_action('wp_head', 'hefo_wp_head_pre', 1);
 function hefo_wp_head_pre() {
     global $hefo_options, $wp_query;
     
+    if (is_home() && is_paged() && $hefo_options['seo_home_paged_noindex'] == 1) {
+      echo '<meta name="robots" content="noindex">';
+    }
+    
     if (is_home()) {
         if (empty($hefo_options['og_type_home'])) $hefo_options['og_type_home'] = $hefo_options['og_type'];
         if (!empty($hefo_options['og_type_home'])) echo '<meta property="og:type" content="' . $hefo_options['og_type_home'] . '" />';

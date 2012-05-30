@@ -44,6 +44,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.3.9 =
+
+* Added a SEO option for noindex of page 2 and up of the home page
+
 = 1.3.8 =
 
 * Removed the init configuration, too much dangerous

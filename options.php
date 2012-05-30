@@ -18,6 +18,14 @@ function hefo_field_checkbox($name, $label='', $tips='', $attrs='') {
     echo '</td>';
 }
 
+function hefo_field_checkbox_only($name, $tips='', $attrs='') {
+    global $options;
+    echo '<td><input type="checkbox" ' . $attrs . ' name="options[' . $name . ']" value="1" ' .
+        ($options[$name]!= null?'checked':'') . '/>';
+    echo ' ' . $tips;
+    echo '</td>';
+}
+
 function hefo_field_text($name, $label='', $tips='', $attrs='') {
     global $options;
 
@@ -140,6 +148,7 @@ jQuery(document).ready(function(){
         <li><a href="#tabs-2"><?php _e('Post content', 'header-footer'); ?></a></li>
         <li><a href="#tabs-3"><?php _e('Page content', 'header-footer'); ?></a></li>
         <li><a href="#tabs-4"><?php _e('Facebook', 'header-footer'); ?></a></li>
+        <li><a href="#tabs-9"><?php _e('SEO', 'header-footer'); ?></a></li>
         <li><a href="#tabs-5"><?php _e('Snippets', 'header-footer'); ?></a></li>
         <li><a href="#tabs-6"><?php _e('BBPress', 'header-footer'); ?></a></li>
         <!--<li><a href="#tabs-8"><?php _e('Advanced', 'header-footer'); ?></a></li>-->
@@ -197,6 +206,20 @@ jQuery(document).ready(function(){
         </table>
         -->
         </div>
+      
+      
+        <div id="tabs-9">
+        <!--<h3>SEO</h3>-->
+        <table class="form-table">
+            <tr valign="top">
+              <th scope="row">
+                Home
+              </th>
+              <?php hefo_field_checkbox_only('seo_home_paged_noindex', __('Add noindex for page 2 and up', 'header-footer')); ?>
+            </tr>
+        </table>
+        </div>
+      
 
         <div id="tabs-5">
         <p>
