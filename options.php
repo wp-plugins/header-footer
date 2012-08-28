@@ -50,7 +50,7 @@ function hefo_field_textarea($name, $label='', $tips='', $attrs='') {
         htmlspecialchars($options[$name]) . '</textarea>';
     echo '<br /> ' . $tips;
     echo '</td>';
-}	
+}
 
 if (isset($_POST['save'])) {
     if (!wp_verify_nonce($_POST['_wpnonce'], 'save')) die('Securety violated');
@@ -61,7 +61,7 @@ else {
     $options = get_option('hefo');
 }
 
-?>	
+?>
 <script>
 jQuery.cookie = function(name, value, options) {
   if (typeof value != 'undefined') { // name and value given, set cookie
@@ -103,8 +103,8 @@ jQuery.cookie = function(name, value, options) {
     }
     return cookieValue;
   }
-};  
-  
+};
+
 var hefo_tabs;
 jQuery(document).ready(function(){
     jQuery("textarea").focus(function() {
@@ -138,10 +138,10 @@ jQuery(document).ready(function(){
 
     <p><?php _e('Detailed documentation and FAQs can be found online on <a href="http://www.satollo.net/plugins/header-footer"><strong>Header and Footer plugin official page</strong></a>.'); ?></p>
     <p><?php _e('PHP is allowed on textareas below.'); ?> <?php _e('If you use bbPress, read the official page.'); ?></p>
-    
+
     <form method="post" action="">
         <?php wp_nonce_field('save') ?>
-   
+
     <div id="tabs">
     <ul>
         <li><a href="#tabs-1"><?php _e('Page head and footer', 'header-footer'); ?></a></li>
@@ -154,7 +154,7 @@ jQuery(document).ready(function(){
         <!--<li><a href="#tabs-8"><?php _e('Advanced', 'header-footer'); ?></a></li>-->
         <li><a href="#tabs-7"><?php _e('Notes and...', 'header-footer'); ?></a></li>
     </ul>
-       
+
         <div id="tabs-1">
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('head_home', __('Code to be added on HEAD section of the home', 'header-footer'), '', 'rows="4"'); ?></tr>
@@ -162,7 +162,7 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('footer', __('Code to be added before the end of the page', 'header-footer'), 'It works if your theme has the wp_footer call. It should be just before the &lt;/body&gt; closing tag', 'rows="10"'); ?></tr>
         </table>
         </div>
-        
+
 
 
         <div id="tabs-2">
@@ -172,23 +172,25 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('after', __('Code to be inserted after each post', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
-        
+
         <div id="tabs-3">
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('page_before', __('Code to be inserted before each page', 'header-footer'), '', 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('page_after', __('Code to be inserted after each page', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
-        
+
         <div id="tabs-4">
         <!--<h3>Facebook</h3>-->
         <table class="form-table">
+            <tr valign="top"><?php hefo_field_checkbox('og_enabled', __('Enable the OG metatag', 'header-footer'), __('Enable the the Facebook Open Graph metatag', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_text('og_type', __('Facebook page type for the generic web page', 'header-footer'), __('Usually "article" is the right choice, if empty will be skipped', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_text('og_type_home', __('Facebook page type for the home', 'header-footer'), __('Usually "blog" is a good choice, if empty will be used the generic type', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_checkbox('og_image', __('Facebook Open Graph Image', 'header-footer'), __('Adds the Facebook Open Graph metatag with a reference to the first post image', 'header-footer')); ?></tr>
             <tr valign="top">
                 <th scope="row">
-                    <label for="options[' . $name . ']"><?php _e('Facebook Open Graph default image'); ?></label></th>
+                    <label for="options[' . $name . ']"><?php _e('Facebook Open Graph default image'); ?></label>
+                </th>
                     <td>
                         <input type="text" id="og_image_default" name="options[og_image_default]" value="<?php echo htmlspecialchars($options['og_image_default']); ?>" size="50"/>
                         <input type="button" id="upload-image" value="Select/Upload an image"/>
@@ -206,9 +208,11 @@ jQuery(document).ready(function(){
         </table>
         -->
         </div>
-      
-      
+
+
         <div id="tabs-9">
+        <p><?php _e('Please, see the <a href="http://www.satollo.net/plugins/header-footer" target="_blank">Header and Footer</strong></a> page before to use those options.'); ?></p>
+
         <!--<h3>SEO</h3>-->
         <table class="form-table">
             <tr valign="top">
@@ -217,9 +221,29 @@ jQuery(document).ready(function(){
               </th>
               <?php hefo_field_checkbox_only('seo_home_paged_noindex', __('Add noindex for page 2 and up', 'header-footer')); ?>
             </tr>
+            <tr valign="top">
+              <th scope="row">
+                Search results
+              </th>
+              <?php hefo_field_checkbox_only('seo_search_noindex', __('Add noindex for search result pages', 'header-footer')); ?>
+            </tr>
+            <tr valign="top">
+              <th scope="row">
+                Canonical on home
+              </th>
+              <?php hefo_field_checkbox_only('seo_home_canonical', __('Add canonical to home page', 'header-footer')); ?>
+            </tr>
+            <!--
+            <tr valign="top">
+              <th scope="row">
+                Archives
+              </th>
+              <?php hefo_field_checkbox_only('seo_archives_paged_noindex', __('Add noindex for page 2 and up for archives (by category, author, date, tag, ...)', 'header-footer')); ?>
+            </tr>
+            -->
         </table>
         </div>
-      
+
 
         <div id="tabs-5">
         <p>
@@ -232,7 +256,7 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('snippet_' . $i, __('Snippet ' . $i, 'header-footer'), '', 'rows="10"'); ?></tr>
             <? } ?>
         </table>
-        </div>        
+        </div>
 
         <div id="tabs-6">
         <p>
@@ -243,22 +267,22 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('bbp_theme_after_reply_content', __('After reply content', 'header-footer'), 'Hook: bbp_theme_after_reply_content', 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('bbp_template_before_single_topic', __('Before single topic', 'header-footer'), 'Hook: bbp_template_before_single_topic', 'rows="10"'); ?></tr>
         </table>
-            
-        </div>  
-      
+
+        </div>
+
         <!--
         <div id="tabs-8">
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('init', __('PHP code to be executed on plugin init', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
-        </div>        
+        </div>
         -->
-        
+
         <div id="tabs-7">
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('notes', __('Notes and parked codes', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
-        </div>        
+        </div>
     </div>
     <p class="submit"><input type="submit" class="button" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
 
@@ -266,4 +290,3 @@ jQuery(document).ready(function(){
 </div>
 
 
-      

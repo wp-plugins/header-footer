@@ -23,6 +23,7 @@ in a centralized point to manage them all.
 * manage codes to be added before and after post content (social buttons, ads, ...)
 * PDF manual with examples
 * recognize and execute PHP code to add logic
+* few SEO options
 
 Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
 
@@ -46,7 +47,9 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 = 1.3.9 =
 
-* Added a SEO option for noindex of page 2 and up of the home page
+* Added a SEO option for noindex meta tag on page 2 and up of the home page
+* Added a SEO option for canonical on home page (save you from URLs with query string parameter used by plugins)
+* Added a SEO option for noindex meta tag on seach result pages
 
 = 1.3.8 =
 
