@@ -132,11 +132,27 @@ jQuery(document).ready(function(){
 });
 </script>
 <div class="wrap">
+
+<div id="satollo-header">
+    <a href="http://www.satollo.net/plugins/header-footer" target="_blank">Get Help</a>
+    <a href="http://www.satollo.net/forums" target="_blank">Forum</a>
+
+    <form style="display: inline; margin: 0;" action="http://www.satollo.net/wp-content/plugins/newsletter/do/subscribe.php" method="post" target="_blank">
+        Subscribe to satollo.net <input type="email" name="ne" required placeholder="Your email">
+        <input type="hidden" name="nr" value="header-footer">
+        <input type="submit" value="Go">
+    </form>
+
+    <a href="https://www.facebook.com/satollo.net" target="_blank"><img style="vertical-align: bottom" src="<?php echo NEWSLETTER_URL; ?>/images/facebook.png"></a>
+
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5PHGDGNHAYLJ8" target="_blank"><img style="vertical-align: bottom" src="http://www.satollo.net/images/donate.png"></a>
+    <a href="http://www.satollo.net/donations" target="_blank">Even <b>1$</b> helps: read more</a>
+
+    <div style="display: inline; position: relative; top: 5px"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.satollo.net%2Fplugins%2Fheader-footer&amp;send=false&amp;layout=button_count&amp;width=130&amp;show_faces=false&amp;action=recommend&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=102960746539273" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:21px;" allowTransparency="true"></iframe></div>
+</div>
+
     <h2>Header and Footer</h2>
 
-    <iframe src="http://frames.satollo.net/header-footer.php" frameborder="0" width="100%" height="80" style="border: 0"></iframe>
-
-    <p><?php _e('Detailed documentation and FAQs can be found online on <a href="http://www.satollo.net/plugins/header-footer"><strong>Header and Footer plugin official page</strong></a>.'); ?></p>
     <p><?php _e('PHP is allowed on textareas below.'); ?> <?php _e('If you use bbPress, read the official page.'); ?></p>
 
     <form method="post" action="">

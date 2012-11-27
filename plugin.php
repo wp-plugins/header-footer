@@ -3,15 +3,15 @@
 /*
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
-  Description: Header and Footer by Satollo.net lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
-  Version: 1.3.9
+  Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
+  Version: 1.4.0
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
  */
 
 /*
-  Copyright 2008-2011 Satollo  (email : info@satollo.net)
+  Copyright 2008-2012 Stefano Lissa (stefano@satollo.net)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -28,25 +28,25 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-define('HEFO_VERSION', '1.3.9');
+define('HEFO_VERSION', '1.4.0');
 
 $hefo_options = get_option('hefo');
 
 add_action('init', 'hefo_init');
 function hefo_init() {
   global $hefo_options;
-  
+
   if (get_option('hefo_version') == null) {
     update_option('hefo_version', HEFO_VERSION);
     // Patch for version 1.3.9
     $hefo_options['og_enabled'] = 1;
     update_option('hefo', $hefo_options);
   }
-  
+
   if (get_option('hefo_version') != HEFO_VERSION) {
     update_option('hefo_version', HEFO_VERSION);
   }
-  
+
 //  if (!empty($hefo_options['init'])) {
 //    ob_start();
 //    eval($hefo_options['init']);
@@ -54,7 +54,7 @@ function hefo_init() {
 //  }
 }
 
-  
+
 add_action('admin_init', 'hefo_admin_init');
 function hefo_admin_init() {
     if (strpos($_GET['page'], 'header-footer/') === 0) {
@@ -70,9 +70,7 @@ function hefo_admin_head()
 {
     if (strpos($_GET['page'], 'header-footer/') === 0) {
         echo '<link type="text/css" rel="stylesheet" href="' .
-        get_option('siteurl') . '/wp-content/plugins/header-footer/jquery-ui.css"/>';
-        echo '<link type="text/css" rel="stylesheet" href="' .
-        get_option('siteurl') . '/wp-content/plugins/header-footer/style.css"/>';
+        get_option('siteurl') . '/wp-content/plugins/header-footer/admin.css"/>';
     }
 
 }
@@ -86,23 +84,23 @@ function hefo_admin_menu() {
 add_action('wp_head', 'hefo_wp_head_pre', 1);
 function hefo_wp_head_pre() {
     global $hefo_options, $wp_query;
-    
+
     if (is_home() && is_paged() && $hefo_options['seo_home_paged_noindex'] == 1) {
       echo '<meta name="robots" content="noindex">';
     }
-    
+
     if (is_home() && !is_paged() && $hefo_options['seo_home_canonical'] == 1) {
       echo '<meta name="canonical" content="' . get_option('home') . '">';
-    }    
-    
+    }
+
     if (is_archive() && is_paged() && $hefo_options['seo_archives_paged_noindex'] == 1) {
       echo '<meta name="robots" content="noindex">';
     }
-    
+
     if (is_search() && $hefo_options['seo_search_noindex'] == 1) {
       echo '<meta name="robots" content="noindex">';
-    }    
-    
+    }
+
     if ($hefo_options['og_enabled'] == 1) {
     if (is_home()) {
         if (empty($hefo_options['og_type_home'])) $hefo_options['og_type_home'] = $hefo_options['og_type'];
@@ -111,7 +109,7 @@ function hefo_wp_head_pre() {
     else {
         if (!empty($hefo_options['og_type'])) echo '<meta property="og:type" content="' . $hefo_options['og_type'] . '" />';
     }
-    
+
     // Add it as higer as possible, Facebook reads only the first part of a page
     if (isset($hefo_options['og_image'])) {
         if (is_single() || is_page()) {
@@ -195,14 +193,14 @@ function hefo_bbp_theme_before_reply_content() {
 add_action('bbp_theme_after_reply_content', 'hefo_bbp_theme_after_reply_content');
 function hefo_bbp_theme_after_reply_content() {
     global $hefo_options, $wpdb, $post, $bbp_reply_count;
-    
+
     echo hefo_execute(hefo_replace($hefo_options['bbp_theme_after_reply_content']));
 }
 
 add_action('bbp_template_before_single_topic', 'hefo_bbp_template_before_single_topic');
 function hefo_bbp_template_before_single_topic() {
     global $hefo_options, $wpdb, $post;
-    
+
     echo hefo_execute(hefo_replace($hefo_options['bbp_template_before_single_topic']));
 }
 
