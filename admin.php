@@ -5,7 +5,7 @@ delete_option('hefo_version');
 add_action('admin_init', 'hefo_admin_init');
 
 function hefo_admin_init() {
-    if (strpos($_GET['page'], 'header-footer/') === 0) {
+    if (isset($_GET['page']) && strpos($_GET['page'], 'header-footer/') === 0) {
         wp_enqueue_script('jquery-ui-tabs');
         wp_enqueue_script('media-upload');
         wp_enqueue_script('thickbox');
@@ -16,7 +16,7 @@ function hefo_admin_init() {
 add_action('admin_head', 'hefo_admin_head');
 
 function hefo_admin_head() {
-    if (strpos($_GET['page'], 'header-footer/') === 0) {
+    if (isset($_GET['page']) && strpos($_GET['page'], 'header-footer/') === 0) {
         echo '<link type="text/css" rel="stylesheet" href="' .
         get_option('siteurl') . '/wp-content/plugins/header-footer/admin.css"/>';
     }

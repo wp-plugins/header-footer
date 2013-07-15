@@ -47,6 +47,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.4.4 =
+
+* Fixed a debug warning
+
 = 1.4.3 =
 
 * Performance improvements
