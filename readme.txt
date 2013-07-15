@@ -1,9 +1,9 @@
 === Header and Footer ===
 Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads
 Requires at least: 2.9
-Tested up to: 3.4.2
+Tested up to: 3.5.2
 Stable tag: trunk
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5PHGDGNHAYLJ8
+Donate link: http://www.satollo.net/donations
 
 Header and Footer plugin let you to add html code to the head and footer sections of your blog... and more!
 
@@ -42,8 +42,25 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 1. Configuration panel for blog HEAD and footer sections
 2. Configuration panel for post content
 3. Configuration panel for Facebook "og" tags
+4. Configurable snippets of code to be recalled on other configurations (to save time)
+5. BBPress integration
 
 == Changelog ==
+
+= 1.4.3 =
+
+* Performance improvements
+
+= 1.4.2 =
+
+* Added top and bottom injection controls on single posts and pages
+
+= 1.4.1 =
+
+* Added global variables "hefo_page_top", "hefo_page_bottom" that, if set to false, blocks the page injection
+* Added global variables "hefo_post_top", "hefo_post_bottom" that, if set to false, blocks the page injection
+* Added configuration to inject code on excerpts
+* Added global variable $hefo_count which counts the number of process excerpts
 
 = 1.4.0 =
 

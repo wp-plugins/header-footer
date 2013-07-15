@@ -3,6 +3,13 @@ if (function_exists('load_plugin_textdomain')) {
     load_plugin_textdomain('header-footer', false, 'header-footer/languages');
 }
 
+$dismissed = get_option('hefo_dismissed', array());
+
+if (isset($_REQUEST['dismiss']) && check_admin_referer()) {
+    $dismissed[$_REQUEST['dismiss']] = 1;
+    update_option('hefo_dismissed', $dismissed);
+}
+
 function hefo_request($name, $default=null) {
     if (!isset($_REQUEST[$name])) return $default;
     return stripslashes_deep($_REQUEST[$name]);
@@ -143,7 +150,7 @@ jQuery(document).ready(function(){
         <input type="submit" value="Go">
     </form>
 
-    <a href="https://www.facebook.com/satollo.net" target="_blank"><img style="vertical-align: bottom" src="<?php echo NEWSLETTER_URL; ?>/images/facebook.png"></a>
+    <a href="https://www.facebook.com/satollo.net" target="_blank"><img style="vertical-align: bottom" src="http://www.satollo.net/images/facebook.png"></a>
 
     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5PHGDGNHAYLJ8" target="_blank"><img style="vertical-align: bottom" src="http://www.satollo.net/images/donate.png"></a>
     <a href="http://www.satollo.net/donations" target="_blank">Even <b>1$</b> helps: read more</a>
@@ -152,6 +159,16 @@ jQuery(document).ready(function(){
 </div>
 
     <h2>Header and Footer</h2>
+
+    <?php if ($dismissed['rate'] != 1) { ?>
+    <div class="satollo-notice">
+        I never asked before and I'm curious: <a href="http://wordpress.org/extend/plugins/header-footer/" target="_blank"><strong>would you rate this plugin</strong></a>?
+        (takes only few seconds required - account on WordPress.org, every blog owner should have one...). <strong>Really appreciated, Stefano</strong>.
+        <div class="satollo-dismiss"><a href="<?php echo wp_nonce_url($_SERVER['REQUEST_URI'] . '&dismiss=rate')?>">Dismiss</a></div>
+        <div style="clear: both"></div>
+    </div>
+    <?php } ?>
+
 
     <p><?php _e('PHP is allowed on textareas below.'); ?> <?php _e('If you use bbPress, read the official page.'); ?></p>
 
@@ -184,8 +201,16 @@ jQuery(document).ready(function(){
         <div id="tabs-2">
         <!--<h3>Posts and pages</h3>-->
         <table class="form-table">
+            <!--<tr valign="top"><?php hefo_field_checkbox('category', __('Enable injection on category pages', 'header-footer')); ?></tr>-->
             <tr valign="top"><?php hefo_field_textarea('before', __('Code to be inserted before each post', 'header-footer'), '', 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('after', __('Code to be inserted after each post', 'header-footer'), '', 'rows="10"'); ?></tr>
+        </table>
+
+        <h3><?php _e('Injection on excerpts', 'header-footer'); ?></h3>
+        <p><?php _e('It works only on category and tag pages.', 'header-footer'); ?></p>
+        <table class="form-table">
+            <tr valign="top"><?php hefo_field_textarea('excerpt_before', __('Code to be inserted before each post excerpt', 'header-footer'), '', 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('excerpt_after', __('Code to be inserted after each post excerpt', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
 
@@ -199,7 +224,7 @@ jQuery(document).ready(function(){
         <div id="tabs-4">
         <!--<h3>Facebook</h3>-->
         <table class="form-table">
-            <tr valign="top"><?php hefo_field_checkbox('og_enabled', __('Enable the OG metatag', 'header-footer'), __('Enable the the Facebook Open Graph metatag', 'header-footer')); ?></tr>
+            <tr valign="top"><?php hefo_field_checkbox('og_enabled', __('Enable the OG metatag', 'header-footer'), __('Enable the Facebook Open Graph metatag', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_text('og_type', __('Facebook page type for the generic web page', 'header-footer'), __('Usually "article" is the right choice, if empty will be skipped', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_text('og_type_home', __('Facebook page type for the home', 'header-footer'), __('Usually "blog" is a good choice, if empty will be used the generic type', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_checkbox('og_image', __('Facebook Open Graph Image', 'header-footer'), __('Adds the Facebook Open Graph metatag with a reference to the first post image', 'header-footer')); ?></tr>
