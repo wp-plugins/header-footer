@@ -39,23 +39,23 @@ add_action('wp_head', 'hefo_wp_head_pre', 1);
 function hefo_wp_head_pre() {
     global $hefo_options, $wp_query;
 
-    if (is_home() && is_paged() && $hefo_options['seo_home_paged_noindex'] == 1) {
+    if (is_home() && is_paged() && isset($hefo_options['seo_home_paged_noindex'])) {
         echo '<meta name="robots" content="noindex">';
     }
 
-    if (is_home() && !is_paged() && $hefo_options['seo_home_canonical'] == 1) {
+    if (is_home() && !is_paged() && isset($hefo_options['seo_home_canonical'])) {
         echo '<meta name="canonical" content="' . get_option('home') . '">';
     }
 
-    if (is_archive() && is_paged() && $hefo_options['seo_archives_paged_noindex'] == 1) {
+    if (is_archive() && is_paged() && isset($hefo_options['seo_archives_paged_noindex'])) {
         echo '<meta name="robots" content="noindex">';
     }
 
-    if (is_search() && $hefo_options['seo_search_noindex'] == 1) {
+    if (is_search() && isset($hefo_options['seo_search_noindex'])) {
         echo '<meta name="robots" content="noindex">';
     }
 
-    if ($hefo_options['og_enabled'] == 1) {
+    if (isset($hefo_options['og_enabled'])) {
         if (is_home()) {
             if (empty($hefo_options['og_type_home'])) $hefo_options['og_type_home'] = $hefo_options['og_type'];
             if (!empty($hefo_options['og_type_home'])) echo '<meta property="og:type" content="' . $hefo_options['og_type_home'] . '" />';

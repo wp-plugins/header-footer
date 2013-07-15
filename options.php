@@ -20,7 +20,7 @@ function hefo_field_checkbox($name, $label='', $tips='', $attrs='') {
     echo '<th scope="row">';
     echo '<label for="options[' . $name . ']">' . $label . '</label></th>';
     echo '<td><input type="checkbox" ' . $attrs . ' name="options[' . $name . ']" value="1" ' .
-        ($options[$name]!= null?'checked':'') . '/>';
+        (isset($options[$name])?'checked':'') . '/>';
     echo ' ' . $tips;
     echo '</td>';
 }
@@ -28,7 +28,7 @@ function hefo_field_checkbox($name, $label='', $tips='', $attrs='') {
 function hefo_field_checkbox_only($name, $tips='', $attrs='') {
     global $options;
     echo '<td><input type="checkbox" ' . $attrs . ' name="options[' . $name . ']" value="1" ' .
-        ($options[$name]!= null?'checked':'') . '/>';
+        (isset($options[$name])?'checked':'') . '/>';
     echo ' ' . $tips;
     echo '</td>';
 }
@@ -36,7 +36,8 @@ function hefo_field_checkbox_only($name, $tips='', $attrs='') {
 function hefo_field_text($name, $label='', $tips='', $attrs='') {
     global $options;
 
-
+    if (!isset($options[$name])) $options[$name] = '';
+    
     echo '<th scope="row">';
     echo '<label for="options[' . $name . ']">' . $label . '</label></th>';
     echo '<td><input type="text" name="options[' . $name . ']" value="' .
@@ -47,6 +48,8 @@ function hefo_field_text($name, $label='', $tips='', $attrs='') {
 
 function hefo_field_textarea($name, $label='', $tips='', $attrs='') {
     global $options;
+    
+    if (!isset($options[$name])) $options[$name] = '';
 
     if (strpos($attrs, 'cols') === false) $attrs .= 'cols="70"';
     if (strpos($attrs, 'rows') === false) $attrs .= 'rows="5"';
@@ -160,7 +163,7 @@ jQuery(document).ready(function(){
 
     <h2>Header and Footer</h2>
 
-    <?php if ($dismissed['rate'] != 1) { ?>
+    <?php if (!isset($dismissed['rate'])) { ?>
     <div class="satollo-notice">
         I never asked before and I'm curious: <a href="http://wordpress.org/extend/plugins/header-footer/" target="_blank"><strong>would you rate this plugin</strong></a>?
         (takes only few seconds required - account on WordPress.org, every blog owner should have one...). <strong>Really appreciated, Stefano</strong>.
