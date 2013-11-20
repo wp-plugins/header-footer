@@ -187,7 +187,7 @@ jQuery(document).ready(function(){
         <li><a href="#tabs-9"><?php _e('SEO', 'header-footer'); ?></a></li>
         <li><a href="#tabs-5"><?php _e('Snippets', 'header-footer'); ?></a></li>
         <li><a href="#tabs-6"><?php _e('BBPress', 'header-footer'); ?></a></li>
-        <!--<li><a href="#tabs-8"><?php _e('Advanced', 'header-footer'); ?></a></li>-->
+        <li><a href="#tabs-8"><?php _e('Advanced', 'header-footer'); ?></a></li>
         <li><a href="#tabs-7"><?php _e('Notes and...', 'header-footer'); ?></a></li>
     </ul>
 
@@ -307,20 +307,29 @@ jQuery(document).ready(function(){
             Injection points on bbPress default theme structure are not always clear to me, so consider this feature experimental.
         </p>
         <table class="form-table">
+            <tr valign="top"><?php hefo_field_textarea('bbp_template_before_single_forum', __('Before single forum', 'header-footer'), 'Hook: bbp_template_before_single_forum', 'rows="10"'); ?></tr>
+            <tr valign="top"><?php hefo_field_textarea('bbp_template_before_single_topic', __('Before single topic', 'header-footer'), 'Hook: bbp_template_before_single_topic', 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('bbp_theme_before_reply_content', __('Before reply content', 'header-footer'), 'Hook: bbp_theme_before_reply_content', 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('bbp_theme_after_reply_content', __('After reply content', 'header-footer'), 'Hook: bbp_theme_after_reply_content', 'rows="10"'); ?></tr>
-            <tr valign="top"><?php hefo_field_textarea('bbp_template_before_single_topic', __('Before single topic', 'header-footer'), 'Hook: bbp_template_before_single_topic', 'rows="10"'); ?></tr>
         </table>
 
         </div>
 
-        <!--
+        
         <div id="tabs-8">
         <table class="form-table">
+            <!--
             <tr valign="top"><?php hefo_field_textarea('init', __('PHP code to be executed on plugin init', 'header-footer'), '', 'rows="10"'); ?></tr>
-        </table>
+            -->
+            <tr valign="top">
+              <th scope="row">
+                Sticky plugin
+              </th>
+              <?php hefo_field_checkbox_only('sticky_enabled', __('Enable - experimental do not use until documented', 'header-footer')); ?>
+            </tr>
+            </table>
         </div>
-        -->
+        
 
         <div id="tabs-7">
         <table class="form-table">

@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
-  Version: 1.4.4
+  Version: 1.4.5
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -57,11 +57,14 @@ function hefo_wp_head_pre() {
 
     if (isset($hefo_options['og_enabled'])) {
         if (is_home()) {
-            if (empty($hefo_options['og_type_home'])) $hefo_options['og_type_home'] = $hefo_options['og_type'];
-            if (!empty($hefo_options['og_type_home'])) echo '<meta property="og:type" content="' . $hefo_options['og_type_home'] . '" />';
+            if (empty($hefo_options['og_type_home']))
+                $hefo_options['og_type_home'] = $hefo_options['og_type'];
+            if (!empty($hefo_options['og_type_home']))
+                echo '<meta property="og:type" content="' . $hefo_options['og_type_home'] . '" />';
         }
         else {
-            if (!empty($hefo_options['og_type'])) echo '<meta property="og:type" content="' . $hefo_options['og_type'] . '" />';
+            if (!empty($hefo_options['og_type']))
+                echo '<meta property="og:type" content="' . $hefo_options['og_type'] . '" />';
         }
 
         // Add it as higer as possible, Facebook reads only the first part of a page
@@ -76,14 +79,14 @@ function hefo_wp_head_pre() {
                 }
                 $xtid = function_exists('get_post_thumbnail_id') ? get_post_thumbnail_id($xid) : false;
                 if ($xtid) {
-                    $ximage = wp_get_attachment_image_src($xtid, 'thumbnail');
-                    echo '<meta property="og:image" content="' . $ximage[0] . '" />';
+                    $ximage = wp_get_attachment_url($xtid);
+                    echo '<meta property="og:image" content="' . $ximage . '" />';
                 } else {
                     $xattachments = get_children(array('post_parent' => $xid, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order'));
                     if (!empty($xattachments)) {
                         foreach ($xattachments as $id => $attachment) {
-                            $ximage = wp_get_attachment_image_src($id, 'thumbnail');
-                            echo '<meta property="og:image" content="' . $ximage[0] . '" />';
+                            $ximage = wp_get_attachment_url($id);
+                            echo '<meta property="og:image" content="' . $ximage . '" />';
                             break;
                         }
                     } else {
@@ -106,7 +109,8 @@ add_action('wp_head', 'hefo_wp_head_post', 11);
 function hefo_wp_head_post() {
     global $hefo_options, $wp_query, $wpdb;
     $buffer = '';
-    if (is_home()) $buffer .= hefo_replace($hefo_options['head_home']);
+    if (is_home())
+        $buffer .= hefo_replace($hefo_options['head_home']);
 
     $buffer .= hefo_replace($hefo_options['head']);
 
@@ -129,6 +133,13 @@ function hefo_wp_footer() {
     $buffer = ob_get_contents();
     ob_end_clean();
     echo $buffer;
+
+    echo '<script>function hefo_popup(url, width, height) {
+var left = Math.round(screen.width/2-width/2); var top = 0;
+if (screen.height > height) top = Math.round(screen.height/2-height/2);
+window.open(url, "share", "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
+return false;
+}</script>';
 }
 
 // BBPRESS
@@ -148,6 +159,14 @@ function hefo_bbp_theme_after_reply_content() {
     global $hefo_options, $wpdb, $post, $bbp_reply_count;
 
     echo hefo_execute(hefo_replace($hefo_options['bbp_theme_after_reply_content']));
+}
+
+add_action('bbp_template_before_single_forum', 'hefo_bbp_template_before_single_forum');
+
+function hefo_bbp_template_before_single_forum() {
+    global $hefo_options, $wpdb, $post;
+
+    echo hefo_execute(hefo_replace($hefo_options['bbp_template_before_single_forum']));
 }
 
 add_action('bbp_template_before_single_topic', 'hefo_bbp_template_before_single_topic');
@@ -222,19 +241,82 @@ function hefo_the_excerpt($content) {
 }
 
 function hefo_replace($buffer) {
-    global $hefo_options;
-    if (empty($buffer)) return '';
+    global $hefo_options, $post;
+
+    if (empty($buffer))
+        return '';
     for ($i = 1; $i <= 5; $i++) {
         $buffer = str_replace('[snippet_' . $i . ']', $hefo_options['snippet_' . $i], $buffer);
     }
+    $images_url = plugins_url('images', 'header-footer/plugin.php');
+    $permalink = urlencode(get_permalink());
+    $title = urlencode($post->post_title);
+    $buffer = str_replace('[images_url]', $images_url, $buffer);
+
+    $facebook_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink;
+    $buffer = str_replace('[facebook_share_url]', $facebook_url, $buffer);
+
+    // Twitter
+    $twitter_url = 'http://twitter.com/intent/tweet?text=' . $title;
+    $twitter_url .= '&url=' . $permalink;
+    $buffer = str_replace('[twitter_share_url]', $twitter_url, $buffer);
+
+    // Google
+    $google_url = 'https://plus.google.com/share?url=' . $permalink;
+    $buffer = str_replace('[google_share_url]', $google_url, $buffer);
+
+    // Pinterest
+    $pinterest_url = 'http://www.pinterest.com/pin/create/button/?url=' . $permalink;
+    $pinterest_url .= '&media=' . urlencode(hefo_post_image());
+    $pinterest_url .= '&description=' . $title;
+    $buffer = str_replace('[pinterest_share_url]', $pinterest_url, $buffer);
+
+    $linkedin_url = 'http://www.linkedin.com/shareArticle?mini=true&url=' . $permalink;
+    $linkedin_url .= '&title=' . $title . '&source=' . urlencode(get_option('blogname'));
+    $buffer = str_replace('[linkedin_share_url]', $linkedin_url, $buffer);
+
     return $buffer;
 }
 
 function hefo_execute($buffer) {
-    if (empty($buffer)) return '';
+    if (empty($buffer))
+        return '';
     ob_start();
     eval('?>' . $buffer);
     $buffer = ob_get_clean();
     return $buffer;
+}
+
+if (isset($hefo_options['sticky_enabled'])) {
+    add_action('wp_enqueue_scripts', 'hefo_wp_enqueue_scripts');
+
+    function hefo_wp_enqueue_scripts() {
+        wp_enqueue_script('sticky', plugins_url('js/jquery.sticky.js', 'header-footer/plugin.php'), array('jquery'));
+    }
+
+}
+
+function hefo_post_image($size = 'large', $alternative = null) {
+    global $post;
+
+    if (empty($post))
+        return $alternative;
+    $post_id = $post->ID;
+    $image_id = function_exists('get_post_thumbnail_id') ? get_post_thumbnail_id($post_id) : false;
+    if ($image_id) {
+        $image = wp_get_attachment_image_src($image_id, $size);
+        return $image[0];
+    } else {
+        $attachments = get_children(array('post_parent' => $post_id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID'));
+
+        if (empty($attachments)) {
+            return $alternative;
+        }
+
+        foreach ($attachments as $id => &$attachment) {
+            $image = wp_get_attachment_image_src($id, $size);
+            return $image[0];
+        }
+    }
 }
 

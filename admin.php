@@ -6,6 +6,7 @@ add_action('admin_init', 'hefo_admin_init');
 
 function hefo_admin_init() {
     if (isset($_GET['page']) && strpos($_GET['page'], 'header-footer/') === 0) {
+        header('X-XSS-Protection: 0');
         wp_enqueue_script('jquery-ui-tabs');
         wp_enqueue_script('media-upload');
         wp_enqueue_script('thickbox');
