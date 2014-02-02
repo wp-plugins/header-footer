@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/herader-footer">official page</a>.
-  Version: 1.4.5
+  Version: 1.5.0
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -29,6 +29,7 @@
  */
 
 $hefo_options = get_option('hefo');
+$hefo_is_mobile = preg_match('/' . $hefo_options['mobile_user_agents_parsed'] . '/', strtolower($_SERVER['HTTP_USER_AGENT']));
 
 if (is_admin()) {
     include dirname(__FILE__) . '/admin.php';
@@ -65,6 +66,14 @@ function hefo_wp_head_pre() {
         else {
             if (!empty($hefo_options['og_type']))
                 echo '<meta property="og:type" content="' . $hefo_options['og_type'] . '" />';
+        }
+
+        if (!empty($hefo_options['fb_app_id'])) {
+            echo '<meta property="fb:app_id" content="' . $hefo_options['fb_app_id'] . '" />';
+        }
+
+        if (!empty($hefo_options['fb_admins'])) {
+            echo '<meta property="fb:admins" content="' . $hefo_options['fb_admins'] . '" />';
         }
 
         // Add it as higer as possible, Facebook reads only the first part of a page
@@ -186,7 +195,7 @@ $hefo_post_top = true;
 $hefo_post_bottom = true;
 
 function hefo_the_content($content) {
-    global $hefo_options, $wpdb, $post, $hefo_page_top, $hefo_page_bottom, $hefo_post_top, $hefo_post_bottom;
+    global $hefo_options, $wpdb, $post, $hefo_page_top, $hefo_page_bottom, $hefo_post_top, $hefo_post_bottom, $hefo_is_mobile;
 
     //if (is_singular() || ($hefo_options['category'] && (is_category() || is_tag()))) {
     if (is_singular()) {
@@ -194,26 +203,42 @@ function hefo_the_content($content) {
             if ($hefo_page_top) {
                 $value = get_post_meta($post->ID, 'hefo_before', true);
                 if ($value != '1') {
-                    $before = hefo_execute(hefo_replace($hefo_options['page_before']));
+                    if (isset($hefo_options['mobile_page']) && $hefo_is_mobile) {
+                        $before = hefo_execute(hefo_replace($hefo_options['mobile_page_before']));
+                    } else {
+                        $before = hefo_execute(hefo_replace($hefo_options['page_before']));
+                    }
                 }
             }
             if ($hefo_page_bottom) {
                 $value = get_post_meta($post->ID, 'hefo_after', true);
                 if ($value != '1') {
-                    $after = hefo_execute(hefo_replace($hefo_options['page_after']));
+                    if (isset($hefo_options['mobile_page']) && $hefo_is_mobile) {
+                        $after = hefo_execute(hefo_replace($hefo_options['mobile_page_after']));
+                    } else {
+                        $after = hefo_execute(hefo_replace($hefo_options['page_after']));
+                    }
                 }
             }
         } else {
             if ($hefo_post_top) {
                 $value = get_post_meta($post->ID, 'hefo_before', true);
                 if ($value != '1') {
-                    $before = hefo_execute(hefo_replace($hefo_options['before']));
+                    if (isset($hefo_options['mobile_post']) && $hefo_is_mobile) {
+                        $before = hefo_execute(hefo_replace($hefo_options['mobile_before']));
+                    } else {
+                        $before = hefo_execute(hefo_replace($hefo_options['before']));
+                    }
                 }
             }
             if ($hefo_post_bottom) {
                 $value = get_post_meta($post->ID, 'hefo_after', true);
                 if ($value != '1') {
-                    $after = hefo_execute(hefo_replace($hefo_options['after']));
+                    if (isset($hefo_options['mobile_post']) && $hefo_is_mobile) {
+                        $after = hefo_execute(hefo_replace($hefo_options['mobile_after']));
+                    } else {
+                        $after = hefo_execute(hefo_replace($hefo_options['after']));
+                    }
                 }
             }
         }
@@ -291,7 +316,7 @@ if (isset($hefo_options['sticky_enabled'])) {
     add_action('wp_enqueue_scripts', 'hefo_wp_enqueue_scripts');
 
     function hefo_wp_enqueue_scripts() {
-        wp_enqueue_script('sticky', plugins_url('js/jquery.sticky.js', 'header-footer/plugin.php'), array('jquery'));
+        wp_enqueue_script('sticky', plugins_url('js/jquery.sticky.js', 'header-footer/plugin.php'), array('jquery'), false, true);
     }
 
 }
@@ -319,4 +344,3 @@ function hefo_post_image($size = 'large', $alternative = null) {
         }
     }
 }
-

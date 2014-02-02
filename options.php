@@ -58,13 +58,24 @@ function hefo_field_textarea($name, $label='', $tips='', $attrs='') {
     echo '<label for="options[' . $name . ']">' . $label . '</label></th>';
     echo '<td><textarea style="width: 100%; height: 100px" wrap="off" name="options[' . $name . ']">' .
         htmlspecialchars($options[$name]) . '</textarea>';
-    echo '<br /> ' . $tips;
+    echo '<p class="description">' . $tips . '</p>';
     echo '</td>';
 }
 
 if (isset($_POST['save'])) {
-    if (!wp_verify_nonce($_POST['_wpnonce'], 'save')) die('Securety violated');
+    if (!wp_verify_nonce($_POST['_wpnonce'], 'save')) die('Page expired');
     $options = hefo_request('options');
+    if (empty($options['mobile_user_agents'])) {
+        $options['mobile_user_agents'] = "phone\niphone\nipod\nandroid.+mobile\nxoom";
+    }
+    $agents1 = explode("\n", $options['mobile_user_agents']);
+    $agents2 = array();
+    foreach ($agents1 as &$agent) {
+        $agent = trim($agent);
+        if (empty($agent)) continue;
+        $agents2[] = strtolower($agent);
+    }
+    $options['mobile_user_agents_parsed'] = implode('|', $agents2);
     update_option('hefo', $options);
 }
 else {
@@ -152,9 +163,11 @@ jQuery(document).ready(function(){
         <input type="hidden" name="nr" value="header-footer">
         <input type="submit" value="Go">
     </form>
-
+    
+    <!--
     <a href="https://www.facebook.com/satollo.net" target="_blank"><img style="vertical-align: bottom" src="http://www.satollo.net/images/facebook.png"></a>
-
+    -->
+    
     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5PHGDGNHAYLJ8" target="_blank"><img style="vertical-align: bottom" src="http://www.satollo.net/images/donate.png"></a>
     <a href="http://www.satollo.net/donations" target="_blank">Even <b>1$</b> helps: read more</a>
 
@@ -180,9 +193,11 @@ jQuery(document).ready(function(){
 
     <div id="tabs">
     <ul>
-        <li><a href="#tabs-1"><?php _e('Page head and footer', 'header-footer'); ?></a></li>
+        <li><a href="#tabs-first"><?php _e('Page head and footer', 'header-footer'); ?></a></li>
         <li><a href="#tabs-2"><?php _e('Post content', 'header-footer'); ?></a></li>
+        <li><a href="#tabs-post-mobile"><?php _e('Post content (mobile)', 'header-footer'); ?></a></li>
         <li><a href="#tabs-3"><?php _e('Page content', 'header-footer'); ?></a></li>
+        <li><a href="#tabs-page-mobile"><?php _e('Page content (mobile)', 'header-footer'); ?></a></li>
         <li><a href="#tabs-4"><?php _e('Facebook', 'header-footer'); ?></a></li>
         <li><a href="#tabs-9"><?php _e('SEO', 'header-footer'); ?></a></li>
         <li><a href="#tabs-5"><?php _e('Snippets', 'header-footer'); ?></a></li>
@@ -191,7 +206,7 @@ jQuery(document).ready(function(){
         <li><a href="#tabs-7"><?php _e('Notes and...', 'header-footer'); ?></a></li>
     </ul>
 
-        <div id="tabs-1">
+        <div id="tabs-first">
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('head_home', __('Code to be added on HEAD section of the home', 'header-footer'), '', 'rows="4"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('head', __('Code to be added on HEAD section of every page', 'header-footer'), 'It will be added on HEAD section of the home as well', 'rows="10"'); ?></tr>
@@ -216,6 +231,18 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('excerpt_after', __('Code to be inserted after each post excerpt', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
+        
+        
+         <div id="tabs-post-mobile">
+             <p>Please take the time to <a href="http://www.satollo.net/plugins/header-footer" target="_blank">read this page</a> to understand how the "mobile" configuration works. 
+                 See the "advanced tab" to configure the mobile device detection.</p>
+            <table class="form-table">
+                <tr valign="top"><?php hefo_field_checkbox('mobile_post', __('Enable mobile detection and injection', 'header-footer')); ?></tr>
+                <tr valign="top"><?php hefo_field_textarea('mobile_before', __('Code to be inserted before each post', 'header-footer'), '', 'rows="10"'); ?></tr>
+                <tr valign="top"><?php hefo_field_textarea('mobile_after', __('Code to be inserted after each post', 'header-footer'), '', 'rows="10"'); ?></tr>
+            </table>
+        </div>
+        
 
         <div id="tabs-3">
         <table class="form-table">
@@ -223,11 +250,25 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('page_after', __('Code to be inserted after each page', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
+        
+        
+         <div id="tabs-page-mobile">
+             <p>Please take the time to <a href="http://www.satollo.net/plugins/header-footer" target="_blank">read this page</a> to understand how the "mobile" configuration works. 
+                 See the "advanced tab" to configure the mobile device detection.</p>
+            <table class="form-table">
+                <tr valign="top"><?php hefo_field_checkbox('mobile_page', __('Enable mobile detection and injection', 'header-footer')); ?></tr>
+                <tr valign="top"><?php hefo_field_textarea('mobile_page_before', __('Code to be inserted before each page', 'header-footer'), '', 'rows="10"'); ?></tr>
+                <tr valign="top"><?php hefo_field_textarea('mobile_page_after', __('Code to be inserted after each page', 'header-footer'), '', 'rows="10"'); ?></tr>
+            </table>
+        </div>
+        
 
         <div id="tabs-4">
         <!--<h3>Facebook</h3>-->
         <table class="form-table">
             <tr valign="top"><?php hefo_field_checkbox('og_enabled', __('Enable the OG metatag', 'header-footer'), __('Enable the Facebook Open Graph metatag', 'header-footer')); ?></tr>
+            
+            <tr valign="top"><?php hefo_field_text('fb_app_id', __('Facebook application id', 'header-footer'), __('', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_text('og_type', __('Facebook page type for the generic web page', 'header-footer'), __('Usually "article" is the right choice, if empty will be skipped', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_text('og_type_home', __('Facebook page type for the home', 'header-footer'), __('Usually "blog" is a good choice, if empty will be used the generic type', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_checkbox('og_image', __('Facebook Open Graph Image', 'header-footer'), __('Adds the Facebook Open Graph metatag with a reference to the first post image', 'header-footer')); ?></tr>
@@ -317,16 +358,24 @@ jQuery(document).ready(function(){
 
         
         <div id="tabs-8">
-        <table class="form-table">
-            <!--
-            <tr valign="top"><?php hefo_field_textarea('init', __('PHP code to be executed on plugin init', 'header-footer'), '', 'rows="10"'); ?></tr>
-            -->
-            <tr valign="top">
-              <th scope="row">
-                Sticky plugin
-              </th>
-              <?php hefo_field_checkbox_only('sticky_enabled', __('Enable - experimental do not use until documented', 'header-footer')); ?>
-            </tr>
+            <table class="form-table">
+                <!--
+                <tr valign="top"><?php hefo_field_textarea('init', __('PHP code to be executed on plugin init', 'header-footer'), '', 'rows="10"'); ?></tr>
+                -->
+                <tr valign="top">
+                  <th scope="row">
+                    Sticky plugin
+                  </th>
+                  <?php hefo_field_checkbox_only('sticky_enabled', __('Enable - experimental do not use until documented', 'header-footer')); ?>
+                </tr>
+                <tr valign="top">
+                    <?php hefo_field_textarea('mobile_user_agents', __('Mobile user agent strings', 'header-footer'), 
+                            'For coders: a regular expression is built with those values and the resulting code will be<br>'
+                            . '<code>preg_match(\'/' . $options['mobile_user_agents_parsed'] . '/\', ...);</code><br>' . 
+                            '<a href="http://www.satollo.net/plugins/header-footer" target="_blank">Read this page</a> for more.', 
+                            'rows="10"'); ?>
+                
+                </tr>
             </table>
         </div>
         
