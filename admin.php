@@ -64,7 +64,7 @@ function hefo_add_meta_boxes_callback($post) {
 function hefo_save_post($post_id) {
 
     // First we need to check if the current user is authorised to do this action.
-    if ('page' == $_POST['post_type']) {
+    if (isset($_POST['post_type']) && 'page' == $_POST['post_type']) {
         if (!current_user_can('edit_page', $post_id)) return;
     } else {
         if (!current_user_can('edit_post', $post_id)) return;

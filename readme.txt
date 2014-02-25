@@ -48,6 +48,17 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.5.2 =
+
+* Fixed a debug notice
+
+= 1.5.1 =
+
+* Fixed some debug notices
+* ru_RU translation by [Eugene Zhukov](https://plus.google.com/u/0/118278852301653300773)
+* Added the "thank you" panel
+* Fixed the missing user agent notice
+
 = 1.5.0 =
 
 * Mobile detection added

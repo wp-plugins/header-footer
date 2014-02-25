@@ -385,6 +385,14 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('notes', __('Notes and parked codes', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
+        
+        <div id="tabs-thankyou">
+        
+            <ul>
+                <li><a href="https://plus.google.com/u/0/118278852301653300773">Евгений Жуков (Eugene Zhukov)</a> - Russian translation</li>
+            </ul>
+        </div>
+        
     </div>
     <p class="submit"><input type="submit" class="button" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
 
