@@ -48,6 +48,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.5.4 =
+
+* Fixed the "global post" variable when injections contain php
+
 = 1.5.3 =
 
 * Fixed a link
