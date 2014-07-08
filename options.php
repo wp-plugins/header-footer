@@ -196,7 +196,7 @@ jQuery(document).ready(function(){
         <li><a href="#tabs-first"><?php _e('Page head and footer', 'header-footer'); ?></a></li>
         <li><a href="#tabs-2"><?php _e('Post content', 'header-footer'); ?></a></li>
         <li><a href="#tabs-post-mobile"><?php _e('Post content (mobile)', 'header-footer'); ?></a></li>
-        <li><a href="#tabs-3"><?php _e('Page content', 'header-footer'); ?></a></li>
+        <li><a href="#tabs-page"><?php _e('Page content', 'header-footer'); ?></a></li>
         <li><a href="#tabs-page-mobile"><?php _e('Page content (mobile)', 'header-footer'); ?></a></li>
         <li><a href="#tabs-4"><?php _e('Facebook', 'header-footer'); ?></a></li>
         <li><a href="#tabs-9"><?php _e('SEO', 'header-footer'); ?></a></li>
@@ -244,8 +244,9 @@ jQuery(document).ready(function(){
         </div>
         
 
-        <div id="tabs-3">
+        <div id="tabs-page">
         <table class="form-table">
+            <tr valign="top"><?php hefo_field_checkbox('page_use_post', __('Use the post configurations', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('page_before', __('Code to be inserted before each page', 'header-footer'), '', 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('page_after', __('Code to be inserted after each page', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>

@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/header-footer">official page</a>.
-  Version: 1.5.4
+  Version: 1.5.5
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -30,9 +30,13 @@
 
 $hefo_options = get_option('hefo');
 $hefo_is_mobile = false;
-if (isset($_SERVER['HTTP_USER_AGENT']) && isset($hefo_options['mobile_user_agents_parsed'])) {
+if (defined('IS_PHONE') && IS_PHONE) {
+    $hefo_is_mobile = true;
+} else if (isset($_SERVER['HTTP_USER_AGENT']) && isset($hefo_options['mobile_user_agents_parsed'])) {
     $hefo_is_mobile = preg_match('/' . $hefo_options['mobile_user_agents_parsed'] . '/', strtolower($_SERVER['HTTP_USER_AGENT']));
 }
+
+//var_dump($hefo_is_mobile);
 
 if (is_admin()) {
     include dirname(__FILE__) . '/admin.php';
@@ -202,7 +206,7 @@ function hefo_the_content($content) {
 
     //if (is_singular() || ($hefo_options['category'] && (is_category() || is_tag()))) {
     if (is_singular()) {
-        if (is_page()) {
+        if (is_page() && !isset($hefo_options['page_use_post'])) {
             if ($hefo_page_top) {
                 $value = get_post_meta($post->ID, 'hefo_before', true);
                 if ($value != '1') {
