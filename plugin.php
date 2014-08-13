@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/header-footer">official page</a>.
-  Version: 1.5.5
+  Version: 1.5.7
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -280,6 +280,10 @@ function hefo_replace($buffer) {
     for ($i = 1; $i <= 5; $i++) {
         $buffer = str_replace('[snippet_' . $i . ']', $hefo_options['snippet_' . $i], $buffer);
     }
+    
+    // For 404 pages and maybe others...
+    if (!is_object($post)) return $buffer;
+        
     $images_url = plugins_url('images', 'header-footer/plugin.php');
     $permalink = urlencode(get_permalink());
     $title = urlencode($post->post_title);

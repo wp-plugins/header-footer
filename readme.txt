@@ -1,7 +1,7 @@
 === Header and Footer ===
-Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads
+Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads, adsense
 Requires at least: 2.9
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Stable tag: trunk
 Donate link: http://www.satollo.net/donations
 
@@ -47,6 +47,14 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 5. BBPress integration
 
 == Changelog ==
+
+= 1.5.7 =
+
+* Fixed a notice for 404 page
+
+= 1.5.6 =
+
+* Version compatibility
 
 = 1.5.5 =
 
