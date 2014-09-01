@@ -246,6 +246,8 @@ jQuery(document).ready(function(){
 
         <div id="tabs-page">
         <table class="form-table">
+            <tr valign="top"><?php hefo_field_checkbox('page_add_tags', __('Let pages to have tags', 'header-footer')); ?></tr>
+            <tr valign="top"><?php hefo_field_checkbox('page_add_categories', __('Let pages to have categories', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_checkbox('page_use_post', __('Use the post configurations', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('page_before', __('Code to be inserted before each page', 'header-footer'), '', 'rows="10"'); ?></tr>
             <tr valign="top"><?php hefo_field_textarea('page_after', __('Code to be inserted after each page', 'header-footer'), '', 'rows="10"'); ?></tr>
