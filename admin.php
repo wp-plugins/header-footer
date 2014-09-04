@@ -5,12 +5,21 @@ delete_option('hefo_version');
 add_action('admin_init', 'hefo_admin_init');
 
 function hefo_admin_init() {
+    global $hefo_options;
     if (isset($_GET['page']) && strpos($_GET['page'], 'header-footer/') === 0) {
         header('X-XSS-Protection: 0');
         wp_enqueue_script('jquery-ui-tabs');
         wp_enqueue_script('media-upload');
         wp_enqueue_script('thickbox');
         wp_enqueue_style('thickbox');
+    }
+
+    if (isset($hefo_options['page_add_tags'])) {
+        register_taxonomy_for_object_type('post_tag', 'page');
+    }
+
+    if (isset($hefo_options['page_add_categories'])) {
+        register_taxonomy_for_object_type('category', 'page');
     }
 }
 
@@ -65,17 +74,17 @@ function hefo_save_post($post_id) {
 
     // First we need to check if the current user is authorised to do this action.
     if (isset($_POST['post_type']) && 'page' == $_POST['post_type']) {
-        if (!current_user_can('edit_page', $post_id)) return;
+        if (!current_user_can('edit_page', $post_id))
+            return;
     } else {
-        if (!current_user_can('edit_post', $post_id)) return;
+        if (!current_user_can('edit_post', $post_id))
+            return;
     }
 
     // Secondly we need to check if the user intended to change this value.
-    if (!isset($_POST['hefo']) || !wp_verify_nonce($_POST['hefo'], plugin_basename(__FILE__))) return;
-
-    $mydata = sanitize_text_field($_POST['myplugin_new_field']);
+    if (!isset($_POST['hefo']) || !wp_verify_nonce($_POST['hefo'], plugin_basename(__FILE__)))
+        return;
 
     update_post_meta($post_id, 'hefo_before', isset($_REQUEST['hefo_before']) ? 1 : 0);
     update_post_meta($post_id, 'hefo_after', isset($_REQUEST['hefo_after']) ? 1 : 0);
 }
-

@@ -1,9 +1,10 @@
 === Header and Footer ===
-Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads
+Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads, adsense
 Requires at least: 2.9
-Tested up to: 3.9.1
+Tested up to: 4.0
 Stable tag: trunk
 Donate link: http://www.satollo.net/donations
+Contributors: satollo
 
 Header and Footer plugin let you to add html code to the head and footer sections of your blog... and more!
 
@@ -47,6 +48,25 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 5. BBPress integration
 
 == Changelog ==
+
+= 1.5.9 =
+
+* Sticky plugin removed
+* Compatibility check with WP 4.0
+* Code improvements on buffering
+
+= 1.5.8 =
+
+* Removed a couple of obsolete lines of code
+* Added options to enable tags and categories on pages
+
+= 1.5.7 =
+
+* Fixed a notice for 404 page
+
+= 1.5.6 =
+
+* Version compatibility
 
 = 1.5.5 =
 
