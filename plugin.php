@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/header-footer">official page</a>.
-  Version: 1.5.8
+  Version: 1.5.9
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -125,16 +125,15 @@ add_action('wp_head', 'hefo_wp_head_post', 11);
 function hefo_wp_head_post() {
     global $hefo_options, $wp_query, $wpdb;
     $buffer = '';
-    if (is_home())
+    if (is_home()) {
         $buffer .= hefo_replace($hefo_options['head_home']);
+    }
 
     $buffer .= hefo_replace($hefo_options['head']);
 
     ob_start();
     eval('?>' . $buffer);
-    $buffer = ob_get_contents();
-    ob_end_clean();
-    echo $buffer;
+    ob_end_flush();
 }
 
 add_action('wp_footer', 'hefo_wp_footer');
@@ -146,10 +145,8 @@ function hefo_wp_footer() {
 
     ob_start();
     eval('?>' . $buffer);
-    $buffer = ob_get_contents();
-    ob_end_clean();
-    echo $buffer;
-
+    ob_end_flush();
+    
     echo '<script>function hefo_popup(url, width, height) {
 var left = Math.round(screen.width/2-width/2); var top = 0;
 if (screen.height > height) top = Math.round(screen.height/2-height/2);
@@ -280,10 +277,11 @@ function hefo_replace($buffer) {
     for ($i = 1; $i <= 5; $i++) {
         $buffer = str_replace('[snippet_' . $i . ']', $hefo_options['snippet_' . $i], $buffer);
     }
-    
+
     // For 404 pages and maybe others...
-    if (!is_object($post)) return $buffer;
-        
+    if (!is_object($post))
+        return $buffer;
+
     $images_url = plugins_url('images', 'header-footer/plugin.php');
     $permalink = urlencode(get_permalink());
     $title = urlencode($post->post_title);
@@ -324,20 +322,12 @@ function hefo_execute($buffer) {
     return $buffer;
 }
 
-if (isset($hefo_options['sticky_enabled'])) {
-    add_action('wp_enqueue_scripts', 'hefo_wp_enqueue_scripts');
-
-    function hefo_wp_enqueue_scripts() {
-        wp_enqueue_script('sticky', plugins_url('js/jquery.sticky.js', 'header-footer/plugin.php'), array('jquery'), false, true);
-    }
-
-}
-
 function hefo_post_image($size = 'large', $alternative = null) {
     global $post;
 
-    if (empty($post))
+    if (empty($post)) {
         return $alternative;
+    }
     $post_id = $post->ID;
     $image_id = function_exists('get_post_thumbnail_id') ? get_post_thumbnail_id($post_id) : false;
     if ($image_id) {

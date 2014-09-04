@@ -362,15 +362,6 @@ jQuery(document).ready(function(){
         
         <div id="tabs-8">
             <table class="form-table">
-                <!--
-                <tr valign="top"><?php hefo_field_textarea('init', __('PHP code to be executed on plugin init', 'header-footer'), '', 'rows="10"'); ?></tr>
-                -->
-                <tr valign="top">
-                  <th scope="row">
-                    Sticky plugin
-                  </th>
-                  <?php hefo_field_checkbox_only('sticky_enabled', __('Enable - experimental do not use until documented', 'header-footer')); ?>
-                </tr>
                 <tr valign="top">
                     <?php hefo_field_textarea('mobile_user_agents', __('Mobile user agent strings', 'header-footer'), 
                             'For coders: a regular expression is built with those values and the resulting code will be<br>'
