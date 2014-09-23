@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/header-footer">official page</a>.
-  Version: 1.5.9
+  Version: 1.6.0
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -46,6 +46,34 @@ add_action('wp_head', 'hefo_wp_head_pre', 1);
 
 function hefo_wp_head_pre() {
     global $hefo_options, $wp_query;
+
+//    remove_action('wp_head', 'wp_generator');
+//    remove_action('wp_head', 'wlwmanifest_link');
+//    remove_action('wp_head', 'rsd_link');
+//    remove_action('wp_head', 'feed_links', 2);
+//    remove_action('wp_head', 'feed_links_extra', 3);
+//    remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+//    remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+
+    if (isset($hefo_options['disable_wlwmanifest_link'])) {
+        remove_action('wp_head', 'wlwmanifest_link');
+    }
+
+    if (isset($hefo_options['disable_rsd_link'])) {
+        remove_action('wp_head', 'rsd_link');
+    }
+
+    if (isset($hefo_options['disable_feed_links_extra'])) {
+        remove_action('wp_head', 'feed_links_extra', 3);
+    }
+
+    if (isset($hefo_options['disable_wp_shortlink_wp_head'])) {
+        remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+    }
+
+    if (isset($hefo_options['disable_wp_shortlink_wp_head'])) {
+        remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+    }
 
     if (is_home() && is_paged() && isset($hefo_options['seo_home_paged_noindex'])) {
         echo '<meta name="robots" content="noindex">';
@@ -146,7 +174,7 @@ function hefo_wp_footer() {
     ob_start();
     eval('?>' . $buffer);
     ob_end_flush();
-    
+
     echo '<script>function hefo_popup(url, width, height) {
 var left = Math.round(screen.width/2-width/2); var top = 0;
 if (screen.height > height) top = Math.round(screen.height/2-height/2);

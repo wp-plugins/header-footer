@@ -49,6 +49,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.6.0 =
+
+* Added options to remove some head links
+
 = 1.5.9 =
 
 * Sticky plugin removed

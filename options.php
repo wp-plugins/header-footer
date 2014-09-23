@@ -37,7 +37,7 @@ function hefo_field_text($name, $label='', $tips='', $attrs='') {
     global $options;
 
     if (!isset($options[$name])) $options[$name] = '';
-    
+
     echo '<th scope="row">';
     echo '<label for="options[' . $name . ']">' . $label . '</label></th>';
     echo '<td><input type="text" name="options[' . $name . ']" value="' .
@@ -48,7 +48,7 @@ function hefo_field_text($name, $label='', $tips='', $attrs='') {
 
 function hefo_field_textarea($name, $label='', $tips='', $attrs='') {
     global $options;
-    
+
     if (!isset($options[$name])) $options[$name] = '';
 
     if (strpos($attrs, 'cols') === false) $attrs .= 'cols="70"';
@@ -163,11 +163,11 @@ jQuery(document).ready(function(){
         <input type="hidden" name="nr" value="header-footer">
         <input type="submit" value="Go">
     </form>
-    
+
     <!--
     <a href="https://www.facebook.com/satollo.net" target="_blank"><img style="vertical-align: bottom" src="http://www.satollo.net/images/facebook.png"></a>
     -->
-    
+
     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5PHGDGNHAYLJ8" target="_blank"><img style="vertical-align: bottom" src="http://www.satollo.net/images/donate.png"></a>
     <a href="http://www.satollo.net/donations" target="_blank">Even <b>1$</b> helps: read more</a>
 
@@ -231,10 +231,10 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('excerpt_after', __('Code to be inserted after each post excerpt', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
-        
-        
+
+
          <div id="tabs-post-mobile">
-             <p>Please take the time to <a href="http://www.satollo.net/plugins/header-footer" target="_blank">read this page</a> to understand how the "mobile" configuration works. 
+             <p>Please take the time to <a href="http://www.satollo.net/plugins/header-footer" target="_blank">read this page</a> to understand how the "mobile" configuration works.
                  See the "advanced tab" to configure the mobile device detection.</p>
             <table class="form-table">
                 <tr valign="top"><?php hefo_field_checkbox('mobile_post', __('Enable mobile detection and injection', 'header-footer')); ?></tr>
@@ -242,7 +242,7 @@ jQuery(document).ready(function(){
                 <tr valign="top"><?php hefo_field_textarea('mobile_after', __('Code to be inserted after each post', 'header-footer'), '', 'rows="10"'); ?></tr>
             </table>
         </div>
-        
+
 
         <div id="tabs-page">
         <table class="form-table">
@@ -253,10 +253,10 @@ jQuery(document).ready(function(){
             <tr valign="top"><?php hefo_field_textarea('page_after', __('Code to be inserted after each page', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
-        
-        
+
+
          <div id="tabs-page-mobile">
-             <p>Please take the time to <a href="http://www.satollo.net/plugins/header-footer" target="_blank">read this page</a> to understand how the "mobile" configuration works. 
+             <p>Please take the time to <a href="http://www.satollo.net/plugins/header-footer" target="_blank">read this page</a> to understand how the "mobile" configuration works.
                  See the "advanced tab" to configure the mobile device detection.</p>
             <table class="form-table">
                 <tr valign="top"><?php hefo_field_checkbox('mobile_page', __('Enable mobile detection and injection', 'header-footer')); ?></tr>
@@ -264,13 +264,13 @@ jQuery(document).ready(function(){
                 <tr valign="top"><?php hefo_field_textarea('mobile_page_after', __('Code to be inserted after each page', 'header-footer'), '', 'rows="10"'); ?></tr>
             </table>
         </div>
-        
+
 
         <div id="tabs-4">
         <!--<h3>Facebook</h3>-->
         <table class="form-table">
             <tr valign="top"><?php hefo_field_checkbox('og_enabled', __('Enable the OG metatag', 'header-footer'), __('Enable the Facebook Open Graph metatag', 'header-footer')); ?></tr>
-            
+
             <tr valign="top"><?php hefo_field_text('fb_app_id', __('Facebook application id', 'header-footer'), __('', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_text('og_type', __('Facebook page type for the generic web page', 'header-footer'), __('Usually "article" is the right choice, if empty will be skipped', 'header-footer')); ?></tr>
             <tr valign="top"><?php hefo_field_text('og_type_home', __('Facebook page type for the home', 'header-footer'), __('Usually "blog" is a good choice, if empty will be used the generic type', 'header-footer')); ?></tr>
@@ -359,34 +359,61 @@ jQuery(document).ready(function(){
 
         </div>
 
-        
+
         <div id="tabs-8">
             <table class="form-table">
                 <tr valign="top">
-                    <?php hefo_field_textarea('mobile_user_agents', __('Mobile user agent strings', 'header-footer'), 
+                    <?php hefo_field_textarea('mobile_user_agents', __('Mobile user agent strings', 'header-footer'),
                             'For coders: a regular expression is built with those values and the resulting code will be<br>'
-                            . '<code>preg_match(\'/' . $options['mobile_user_agents_parsed'] . '/\', ...);</code><br>' . 
-                            '<a href="http://www.satollo.net/plugins/header-footer" target="_blank">Read this page</a> for more.', 
+                            . '<code>preg_match(\'/' . $options['mobile_user_agents_parsed'] . '/\', ...);</code><br>' .
+                            '<a href="http://www.satollo.net/plugins/header-footer" target="_blank">Read this page</a> for more.',
                             'rows="10"'); ?>
-                
+
                 </tr>
             </table>
+            <h3>Head meta links</h3>
+            <p>
+                WordPress automatically add some meta link on the head of the page, for example the RSS links, the previous and next
+                post links and so on. Here you can disable those links if not of interest.
+            </p>
+            <table class="form-table">
+            <tr valign="top">
+              <th scope="row">Extra feed links</th>
+              <?php hefo_field_checkbox_only('disable_feed_links_extra', __('Disable extra feed links like category feeds or single post comments feeds', 'header-footer')); ?>
+            </tr>
+            <tr valign="top">
+              <th scope="row">Short link</th>
+              <?php hefo_field_checkbox_only('disable_wp_shortlink_wp_head', __('Disable the short link for posts', 'header-footer')); ?>
+            </tr>
+            <tr valign="top">
+              <th scope="row">WLW Manifest</th>
+              <?php hefo_field_checkbox_only('disable_wlwmanifest_link', __('Disable the Windows Live Writer manifest', 'header-footer')); ?>
+            </tr>
+            <tr valign="top">
+              <th scope="row">RSD link</th>
+              <?php hefo_field_checkbox_only('disable_rsd_link', __('Disable RSD link', 'header-footer')); ?>
+            </tr>
+            <tr valign="top">
+              <th scope="row">Adjacent post links</th>
+              <?php hefo_field_checkbox_only('disable_adjacent_posts_rel_link_wp_head', __('Disable adjacent post links', 'header-footer')); ?>
+            </tr>
+            </table>
         </div>
-        
+
 
         <div id="tabs-7">
         <table class="form-table">
             <tr valign="top"><?php hefo_field_textarea('notes', __('Notes and parked codes', 'header-footer'), '', 'rows="10"'); ?></tr>
         </table>
         </div>
-        
+
         <div id="tabs-thankyou">
-        
+
             <ul>
                 <li><a href="https://plus.google.com/u/0/118278852301653300773">Евгений Жуков (Eugene Zhukov)</a> - Russian translation</li>
             </ul>
         </div>
-        
+
     </div>
     <p class="submit"><input type="submit" class="button" name="save" value="<?php _e('save', 'header-footer'); ?>"></p>
 
