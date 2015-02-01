@@ -183,13 +183,21 @@ else {
     <h2>Header and Footer</h2>
 
     <?php if (!isset($dismissed['rate'])) { ?>
-        <div class="satollo-notice">
+        <div class="updated">
             I never asked before and I'm curious: <a href="http://wordpress.org/extend/plugins/header-footer/" target="_blank"><strong>would you rate this plugin</strong></a>?
             (takes only few seconds required - account on WordPress.org, every blog owner should have one...). <strong>Really appreciated, Stefano</strong>.
             <div class="satollo-dismiss"><a href="<?php echo wp_nonce_url($_SERVER['REQUEST_URI'] . '&dismiss=rate') ?>">Dismiss</a></div>
             <div style="clear: both"></div>
         </div>
     <?php } ?>
+
+    <p>
+        Check out my other useful plugins:<br>
+        <a href="http://www.satollo.net/plugins/comment-plus?utm_source=hyper-cache&utm_medium=banner&utm_campaign=comment-plus" target="_blank"><img src="http://www.satollo.net/images/plugins/comment-plus-icon.png"></a>
+        <a href="http://www.satollo.net/plugins/hyper-cache?utm_source=hyper-cache&utm_medium=banner&utm_campaign=hyper-cache" target="_blank"><img src="http://www.satollo.net/images/plugins/hyper-cache-icon.png"></a>
+        <a href="http://www.satollo.net/plugins/include-me?utm_source=hyper-cache&utm_medium=banner&utm_campaign=include-me" target="_blank"><img src="http://www.satollo.net/images/plugins/include-me-icon.png"></a>
+        <a href="http://www.thenewsletterplugin.com/?utm_source=hyper-cache&utm_medium=banner&utm_campaign=newsletter" target="_blank"><img src="http://www.satollo.net/images/plugins/newsletter-icon.png"></a>
+    </p>
 
 
     <p><?php _e('PHP is allowed on textareas below.'); ?> <?php _e('If you use bbPress, read the official page.'); ?></p>

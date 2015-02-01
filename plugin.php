@@ -4,14 +4,14 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/header-footer">official page</a>.
-  Version: 1.6.1
+  Version: 1.6.2
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
  */
 
 /*
-  Copyright 2008-2014 Stefano Lissa (stefano@satollo.net)
+  Copyright 2008-2015 Stefano Lissa (stefano@satollo.net)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -169,18 +169,13 @@ add_action('wp_footer', 'hefo_wp_footer');
 function hefo_wp_footer() {
     global $hefo_options;
 
-    $buffer = hefo_replace($hefo_options['footer']);
+    if (!empty($hefo_options['footer'])) {
+        $buffer = hefo_replace($hefo_options['footer']);
 
-    ob_start();
-    eval('?>' . $buffer);
-    ob_end_flush();
-
-    echo '<script>function hefo_popup(url, width, height) {
-var left = Math.round(screen.width/2-width/2); var top = 0;
-if (screen.height > height) top = Math.round(screen.height/2-height/2);
-window.open(url, "share", "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
-return false;
-}</script>';
+        ob_start();
+        eval('?>' . $buffer);
+        ob_end_flush();
+    }
 }
 
 // BBPRESS
@@ -300,15 +295,18 @@ function hefo_the_excerpt($content) {
 function hefo_replace($buffer) {
     global $hefo_options, $post;
 
-    if (empty($buffer))
+    if (empty($buffer)) {
         return '';
+    }
+
     for ($i = 1; $i <= 5; $i++) {
         $buffer = str_replace('[snippet_' . $i . ']', $hefo_options['snippet_' . $i], $buffer);
     }
 
     // For 404 pages and maybe others...
-    if (!is_object($post))
+    if (!is_object($post)) {
         return $buffer;
+    }
 
     $images_url = plugins_url('images', 'header-footer/plugin.php');
     $permalink = urlencode(get_permalink());
@@ -342,8 +340,9 @@ function hefo_replace($buffer) {
 
 function hefo_execute($buffer) {
     global $post;
-    if (empty($buffer))
+    if (empty($buffer)) {
         return '';
+    }
     ob_start();
     eval('?>' . $buffer);
     $buffer = ob_get_clean();
@@ -362,7 +361,7 @@ function hefo_post_image($size = 'large', $alternative = null) {
         $image = wp_get_attachment_image_src($image_id, $size);
         return $image[0];
     } else {
-        $attachments = get_children(array('post_parent' => $post_id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID'));
+        $attachments = get_children(array('numberposts'=>1, 'post_parent' => $post_id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID'));
 
         if (empty($attachments)) {
             return $alternative;
