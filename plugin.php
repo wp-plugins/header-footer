@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/header-footer">official page</a>.
-  Version: 1.6.2
+  Version: 1.6.3
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -40,6 +40,22 @@ if (defined('IS_PHONE') && IS_PHONE) {
 
 if (is_admin()) {
     include dirname(__FILE__) . '/admin.php';
+}
+
+if (isset($hefo_options['disable_css_id'])) {
+
+    function hefo_style_loader_tag($link) {
+        global $hefo_options;
+        $link = preg_replace("/id='.*?-css'/", "", $link);
+        if (isset($hefo_options['disable_css_media'])) {
+            if (!preg_match("/media='print'/", $link)) {
+                $link = preg_replace("/media='.*?'/", "", $link);
+            }
+        }
+        return $link;
+    }
+
+    add_filter('style_loader_tag', 'hefo_style_loader_tag');
 }
 
 add_action('wp_head', 'hefo_wp_head_pre', 1);
@@ -229,6 +245,7 @@ function hefo_the_content($content) {
         if (is_page() && !isset($hefo_options['page_use_post'])) {
             if ($hefo_page_top) {
                 $value = get_post_meta($post->ID, 'hefo_before', true);
+                echo '<!-- value: ' . $value . '-->';
                 if ($value != '1') {
                     if (isset($hefo_options['mobile_page']) && $hefo_is_mobile) {
                         $before = hefo_execute(hefo_replace($hefo_options['mobile_page_before']));
@@ -361,7 +378,7 @@ function hefo_post_image($size = 'large', $alternative = null) {
         $image = wp_get_attachment_image_src($image_id, $size);
         return $image[0];
     } else {
-        $attachments = get_children(array('numberposts'=>1, 'post_parent' => $post_id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID'));
+        $attachments = get_children(array('numberposts' => 1, 'post_parent' => $post_id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID'));
 
         if (empty($attachments)) {
             return $alternative;

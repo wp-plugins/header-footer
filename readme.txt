@@ -1,7 +1,7 @@
 === Header and Footer ===
 Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads, adsense
 Requires at least: 2.9
-Tested up to: 4.1
+Tested up to: 4.1.1
 Stable tag: trunk
 Donate link: http://www.satollo.net/donations
 Contributors: satollo
@@ -47,6 +47,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 5. BBPress integration
 
 == Changelog ==
+
+= 1.6.3 =
+
+* Added the css id removal feature for pagespeed. See [this page](http://www.satollo.net/hyper-cache-and-google-pagespeed-combine-css).
 
 = 1.6.2 =
 
