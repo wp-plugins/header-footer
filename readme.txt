@@ -1,7 +1,7 @@
 === Header and Footer ===
 Tags: header, footer, blog, page, single, post, head, tracking, facebook, og meta tag, open graph, ads, adsense
 Requires at least: 2.9
-Tested up to: 4.1.1
+Tested up to: 4.2.1
 Stable tag: trunk
 Donate link: http://www.satollo.net/donations
 Contributors: satollo
@@ -10,10 +10,15 @@ Header and Footer plugin let you to add html code to the head and footer section
 
 == Description ==
 
-Why you have to install 10 plugins to add Google Analytics code, MyBlogLog
-tracking code, Google Webmaster verificaton code, MyblogLog verification code,
-tradedoubler verification code (and so on...) on head of footer section of your blog
-pages?
+About WordPress SEO and Facebook Open Graph: I was very unpleased by Yoast invitation to
+remove my plugin, and it's not the case. 
+[Read more here](http://www.satollo.net/yoast-and-wordpress-seo-this-is-too-much-conflict-with-header-and-footer).
+
+= Head and Footer Codes =
+
+Why you have to install 10 plugins to add Google Analytics code, custom
+tracking code, Google Webmaster/Alexa/Bing/Tradedoubler verificaton code (and so on...) 
+on head of footer section of your blog pages?
 
 With Header and Footer plugin you can just copy the code those services give you
 in a centralized point to manage them all.
@@ -21,12 +26,33 @@ in a centralized point to manage them all.
 * manage the head section code
 * manage the footer code
 * manage the facebook og:image tag
-* manage codes to be added before and after post content (social buttons, ads, ...)
 * recognize and execute PHP code to add logic
 * few SEO options
 * mobile detection
 
+= Post Top and Bottom Codes =
+
+Do you need to inject a banner over the post content or after it? No problem. With Header and
+Footer you can:
+
+* Add codes on top and bottom of posts and pages
+* Differentiate between mobile and desktop (you don't display the same ad format on both, true?)
+* Separable post and page configuration
+* Native PHP code enabled
+* Shortcodes enbaled
+
+= Limits =
+
+This plugin cannot change the menu or the footer layout, those features must be covered by your theme!
+
 Offial page: [Header and Footer](http://www.satollo.net/plugins/header-footer).
+
+Other plugins by Stefano Lissa:
+
+* [Hyper Cache](http://www.satollo.net/plugins/hyper-cache)
+* [Newsletter](http://www.thenewsletterplugin.com)
+* [Include Me](http://www.satollo.net/plugins/include-me)
+* [Comment Plus](http://www.satollo.net/plugins/comment-plus)
 
 == Installation ==
 
@@ -47,6 +73,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 5. BBPress integration
 
 == Changelog ==
+
+= 1.6.4 =
+
+* Comptibility check
 
 = 1.6.3 =
 
