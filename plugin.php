@@ -36,8 +36,6 @@ if (defined('IS_PHONE') && IS_PHONE) {
     $hefo_is_mobile = preg_match('/' . $hefo_options['mobile_user_agents_parsed'] . '/', strtolower($_SERVER['HTTP_USER_AGENT']));
 }
 
-//var_dump($hefo_is_mobile);
-
 if (is_admin()) {
     include dirname(__FILE__) . '/admin.php';
 }
@@ -59,13 +57,16 @@ if (isset($hefo_options['disable_css_id'])) {
 }
 
 add_filter('script_loader_tag', 'hefo_script_loader_tag', 90, 3);
+
 function hefo_script_loader_tag($tag, $handle, $src) {
     global $hefo_options;
     if (isset($hefo_options['script_handle_debug'])) {
         echo "<!-- script handle: $handle -->\n";
     }
-    if (array_search($handle, $hefo_options['script_async_handles']) !== false) {
-        $tag = str_replace('<script', '<script async', $tag);
+    if (is_array($hefo_options['script_async_handles'])) {
+        if (array_search($handle, $hefo_options['script_async_handles']) !== false) {
+            $tag = str_replace('<script', '<script async', $tag);
+        }
     }
     return $tag;
 }
@@ -74,13 +75,12 @@ add_action('wp_head', 'hefo_wp_head_pre', 1);
 
 function hefo_wp_head_pre() {
     global $hefo_options, $wp_query;
-    
+
 //    global $wp_scripts;
 //    if ($wp_scripts instanceof WP_Scripts) {
 //        $wp_scripts->add_data('jquery', 'group', 1);
 //        $wp_scripts->add_data('jquery-migrate', 'group', 1);
 //    }
-
 //    remove_action('wp_head', 'wp_generator');
 //    remove_action('wp_head', 'wlwmanifest_link');
 //    remove_action('wp_head', 'rsd_link');
