@@ -56,6 +56,8 @@ function hefo_field_textarea($name, $label = '', $tips = '', $attrs = '') {
 
     if (!isset($options[$name]))
         $options[$name] = '';
+    
+    if (is_array($options[$name])) $options[$name] = implode("\n", $options[$name]);
 
     if (strpos($attrs, 'cols') === false)
         $attrs .= 'cols="70"';
@@ -86,6 +88,17 @@ if (isset($_POST['save'])) {
         $agents2[] = strtolower($agent);
     }
     $options['mobile_user_agents_parsed'] = implode('|', $agents2);
+    
+    $script_async_handles1 = explode("\n", $options['script_async_handles']);
+    $script_async_handles2 = array();
+    foreach ($script_async_handles1 as $value) {
+        $value = trim($value);
+        if (empty($value))
+            continue;
+        $script_async_handles2[] = strtolower($value);
+    }
+    $options['script_async_handles'] = $script_async_handles2;
+    
     update_option('hefo', $options);
 }
 else {
@@ -186,12 +199,13 @@ else {
     <h2>Header and Footer</h2>
 
     <?php if (!isset($dismissed['rate'])) { ?>
-        <div class="updated">
+    <div class="updated"><p>
             I never asked before and I'm curious: <a href="http://wordpress.org/extend/plugins/header-footer/" target="_blank"><strong>would you rate this plugin</strong></a>?
             (takes only few seconds required - account on WordPress.org, every blog owner should have one...). <strong>Really appreciated, Stefano</strong>.
             <div class="satollo-dismiss"><a href="<?php echo wp_nonce_url($_SERVER['REQUEST_URI'] . '&dismiss=rate') ?>">Dismiss</a></div>
             <div style="clear: both"></div>
-        </div>
+            </p>   
+    </div>
     <?php } ?>
 
     <p>
@@ -385,6 +399,32 @@ else {
 
                     </tr>
                 </table>
+                
+                <h3>Web performance</h3>
+                <p>
+                    Some JavaScript can be marked to be loaded asynchronously, for example the comment-reply.js of WordPress.
+                    Not always asynchronous load work, for example jQuery cannot usually loaded in this way. Since WordPress does 
+                    not support this feature natively, here you can force thise feature on specific scripts.<br>
+                    Usually you can add comment-reply, akismet-form, admin-bar.<br>
+                    You can read more on <a href="http://www.satollo.net/javascript-asyn-load-for-wordpress-enqueued-scripts" target="_blank">this article</a>
+                    and/or ask on my <a href="http://www.satollo.net/forums" target="_blank">forum area</a>.
+                </p>
+                
+                <table class="form-table">
+                    <tr valign="top">
+                        <th scope="row">
+                            Script handle debug
+                        </th>
+                        <?php hefo_field_checkbox_only('script_handle_debug', __('Activate in page debug info: see the source page to find the handles', 'header-footer')); ?>
+                    
+                    </tr>
+                    <tr valign="top">
+                        <?php
+                        hefo_field_textarea('script_async_handles', __('Script handles to oad asynchronously', 'header-footer'), 'One per line', 'rows="10"');
+                        ?>
+                    </tr>
+                </table>
+                
                 <h3>Head meta links</h3>
                 <p>
                     WordPress automatically add some meta link on the head of the page, for example the RSS links, the previous and next

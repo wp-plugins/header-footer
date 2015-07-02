@@ -74,6 +74,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.6.5 =
+
+* Added a web performance section to force async load of selected JavaScript files
+
 = 1.6.4 =
 
 * Comptibility check

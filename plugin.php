@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/header-footer">official page</a>.
-  Version: 1.6.4
+  Version: 1.6.5
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -58,10 +58,28 @@ if (isset($hefo_options['disable_css_id'])) {
     add_filter('style_loader_tag', 'hefo_style_loader_tag');
 }
 
+add_filter('script_loader_tag', 'hefo_script_loader_tag', 90, 3);
+function hefo_script_loader_tag($tag, $handle, $src) {
+    global $hefo_options;
+    if (isset($hefo_options['script_handle_debug'])) {
+        echo "<!-- script handle: $handle -->\n";
+    }
+    if (array_search($handle, $hefo_options['script_async_handles']) !== false) {
+        $tag = str_replace('<script', '<script async', $tag);
+    }
+    return $tag;
+}
+
 add_action('wp_head', 'hefo_wp_head_pre', 1);
 
 function hefo_wp_head_pre() {
     global $hefo_options, $wp_query;
+    
+//    global $wp_scripts;
+//    if ($wp_scripts instanceof WP_Scripts) {
+//        $wp_scripts->add_data('jquery', 'group', 1);
+//        $wp_scripts->add_data('jquery-migrate', 'group', 1);
+//    }
 
 //    remove_action('wp_head', 'wp_generator');
 //    remove_action('wp_head', 'wlwmanifest_link');
