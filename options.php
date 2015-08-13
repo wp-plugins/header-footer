@@ -233,6 +233,9 @@ else {
                 <li><a href="#tabs-9"><?php _e('SEO', 'header-footer'); ?></a></li>
                 <li><a href="#tabs-5"><?php _e('Snippets', 'header-footer'); ?></a></li>
                 <li><a href="#tabs-6"><?php _e('BBPress', 'header-footer'); ?></a></li>
+                <!--
+                <li><a href="#tabs-6a"><?php _e('Other post types', 'header-footer'); ?></a></li>
+                -->
                 <li><a href="#tabs-8"><?php _e('Advanced', 'header-footer'); ?></a></li>
                 <li><a href="#tabs-7"><?php _e('Notes and...', 'header-footer'); ?></a></li>
                 <li><a href="#tabs-thankyou"><?php _e('Thank you', 'header-footer'); ?></a></li>
@@ -381,12 +384,26 @@ else {
                 <table class="form-table">
                     <tr valign="top"><?php hefo_field_textarea('bbp_template_before_single_forum', __('Before single forum', 'header-footer'), 'Hook: bbp_template_before_single_forum', 'rows="10"'); ?></tr>
                     <tr valign="top"><?php hefo_field_textarea('bbp_template_before_single_topic', __('Before single topic', 'header-footer'), 'Hook: bbp_template_before_single_topic', 'rows="10"'); ?></tr>
+                    <tr valign="top"><?php hefo_field_textarea('bbp_template_after_single_topic', __('After single topic', 'header-footer'), 'Hook: bbp_template_after_single_topic', 'rows="10"'); ?></tr>
                     <tr valign="top"><?php hefo_field_textarea('bbp_theme_before_reply_content', __('Before reply content', 'header-footer'), 'Hook: bbp_theme_before_reply_content', 'rows="10"'); ?></tr>
                     <tr valign="top"><?php hefo_field_textarea('bbp_theme_after_reply_content', __('After reply content', 'header-footer'), 'Hook: bbp_theme_after_reply_content', 'rows="10"'); ?></tr>
                 </table>
 
             </div>
-
+            <!--
+            <div id="tabs-6s">
+                <p>
+                </p>
+                <?php $post_types = get_post_types(array('public'=>true, '_builtin'=>false), 'objects'); ?>
+                <?php foreach ($post_types as $post_type) { ?>
+                <h3><?php echo esc_html($post_type->label)?> (<?php echo esc_html($post_type->name)?>)</h3>
+                <table class="form-table">
+                <tr><?php hefo_field_textarea($post_type->name . '_before', __('Before the content', 'header-footer'), '', 'rows="10"'); ?></tr>
+                <tr><?php hefo_field_textarea($post_type->name . '_after', __('After the content', 'header-footer'), '', 'rows="10"'); ?></tr>
+                </table>
+                <?php } ?>
+            </div>            
+            -->
 
             <div id="tabs-8">
                 <table class="form-table">

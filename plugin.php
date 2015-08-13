@@ -4,7 +4,7 @@
   Plugin Name: Header and Footer
   Plugin URI: http://www.satollo.net/plugins/header-footer
   Description: Header and Footer by Stefano Lissa lets to add html/javascript code to the head and footer of your blog. Some examples are provided on the <a href="http://www.satollo.net/plugins/header-footer">official page</a>.
-  Version: 1.6.5
+  Version: 1.6.6
   Author: Stefano Lissa
   Author URI: http://www.satollo.net
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -247,6 +247,14 @@ function hefo_bbp_template_before_single_topic() {
     echo hefo_execute(hefo_replace($hefo_options['bbp_template_before_single_topic']));
 }
 
+add_action('bbp_template_after_single_topic', 'hefo_bbp_template_after_single_topic');
+
+function hefo_bbp_template_after_single_topic() {
+    global $hefo_options, $wpdb, $post;
+
+    echo hefo_execute(hefo_replace($hefo_options['bbp_template_after_single_topic']));
+}
+
 add_action('the_content', 'hefo_the_content');
 
 global $hefo_page_top, $hefo_page_bottom, $hefo_post_top, $hefo_post_bottom;
@@ -258,12 +266,16 @@ $hefo_post_bottom = true;
 function hefo_the_content($content) {
     global $hefo_options, $wpdb, $post, $hefo_page_top, $hefo_page_bottom, $hefo_post_top, $hefo_post_bottom, $hefo_is_mobile;
 
+    $before = '';
+    $after = '';
     //if (is_singular() || ($hefo_options['category'] && (is_category() || is_tag()))) {
     if (is_singular()) {
+        //if (!empty($hefo_options[$post->post_type . '_before'])) {
+        //    echo $hefo_options[$post->post_type . '_before'];
+        //}
         if (is_page() && !isset($hefo_options['page_use_post'])) {
             if ($hefo_page_top) {
                 $value = get_post_meta($post->ID, 'hefo_before', true);
-                echo '<!-- value: ' . $value . '-->';
                 if ($value != '1') {
                     if (isset($hefo_options['mobile_page']) && $hefo_is_mobile) {
                         $before = hefo_execute(hefo_replace($hefo_options['mobile_page_before']));
