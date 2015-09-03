@@ -74,6 +74,10 @@ FAQs are answered on [Header and Footer](http://www.satollo.net/plugins/header-f
 
 == Changelog ==
 
+= 1.6.7 =
+
+* Added the just after <body> tag injection
+
 = 1.6.6 =
 
 * Fixed few debug notices
